@@ -1,0 +1,41 @@
+<div class="container">
+
+  <h2>Connexion</h2>
+
+  <!-- SUCCESS / INFO -->
+  @if (successMessage) {
+    <div class="success">
+      {{ successMessage }}
+    </div>
+  }
+
+  <!-- ERROR -->
+  @if (errorMessage) {
+    <div class="error">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <div class="form">
+
+    <input
+      type="text"
+      placeholder="Username"
+      [(ngModel)]="username"
+      name="username"
+    >
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      name="password"
+    >
+
+    <button (click)="login()">
+      Se connecter
+    </button>
+
+  </div>
+
+</div>

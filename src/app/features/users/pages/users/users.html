@@ -1,0 +1,38 @@
+<div class="users-container">
+
+  <h2>Liste des utilisateurs</h2>
+
+  @if (loading) {
+    <p>Chargement...</p>
+  }
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (!loading && !error) {
+
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        @for (user of users; track user.id) {
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  }
+
+</div>

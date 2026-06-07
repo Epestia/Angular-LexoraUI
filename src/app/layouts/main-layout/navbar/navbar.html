@@ -1,0 +1,51 @@
+<nav class="navbar">
+
+  <div class="logo">
+    <a routerLink="/">Mon Application</a>
+  </div>
+
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/">Accueil</a>
+    </li>
+
+    <!-- 🔥 CREATE USER (seulement si NON connecté ou selon ton choix) -->
+    <li>
+      @if (!user()) {
+        <a routerLink="/users/create">
+          Créer utilisateur
+        </a>
+      }
+    </li>
+
+    <!-- 🔥 USERS LIST (ADMIN ONLY recommandé) -->
+    <li>
+      @if (user() && user()?.role === 'ADMIN') {
+        <a routerLink="/users">
+          Utilisateurs
+        </a>
+      }
+    </li>
+  </ul>
+
+  <div class="actions">
+
+    @if (!user()) {
+      <a routerLink="/login" class="btn">
+        Connexion
+      </a>
+    }
+
+    @if (user()) {
+      <div class="user-info">
+        Bonjour {{ user()?.sub }}
+      </div>
+
+      <button (click)="logout()">
+        Logout
+      </button>
+    }
+
+  </div>
+
+</nav>
