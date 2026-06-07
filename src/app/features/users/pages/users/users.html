@@ -17,8 +17,8 @@
       <tr>
         <th>ID</th>
         <th>Username</th>
-        <th>Email</th>
         <th>Role</th>
+        <th>Actions</th>
       </tr>
       </thead>
 
@@ -27,7 +27,21 @@
           <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
-            <td>{{ user.role }}</td>
+            <td>{{ user.role.name }}</td>
+
+            <td>
+              @if (user.role.name === 'USER') {
+                <button (click)="setAdmin(user)">
+                  Promouvoir Admin
+                </button>
+              }
+              <button
+                [disabled]="user.role.name === 'ADMIN'"
+                (click)="deleteUser(user.id)">
+                Supprimer
+              </button>
+
+            </td>
           </tr>
         }
       </tbody>

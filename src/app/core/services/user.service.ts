@@ -28,5 +28,10 @@ export class UserService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
+
+
+  promoteToAdmin(userId: number) {
+    return this.http.patch(`${API_ENDPOINTS.users}/${userId}/promote-admin`, {});
+  }
 }
 

@@ -66,8 +66,13 @@ export class AuthService {
     const user = localStorage.getItem('user');
 
     if (token && user) {
-      this.user.set(JSON.parse(user));
+      const parsed = JSON.parse(user);
+
+      this.user.set(parsed);
       this.isLoggedIn.set(true);
+    } else {
+      this.user.set(null);
+      this.isLoggedIn.set(false);
     }
   }
 

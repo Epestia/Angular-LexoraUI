@@ -35,4 +35,27 @@ export class UsersComponent implements OnInit {
       },
     });
   }
+  setAdmin(user: any) {
+    this.userService.promoteToAdmin(user.id).subscribe({
+      next: () => {
+        user.role.name = 'ADMIN';
+      },
+      error: (err) => {
+        alert(err.error?.message || 'Erreur');
+      },
+    });
+  }
+
+  deleteUser(userId: number) {
+    if (!confirm('Voulez-vous supprimer cet utilisateur ?')) return;
+
+    this.userService.delete(userId).subscribe({
+      next: () => {
+        this.users = this.users.filter((u) => u.id !== userId);
+      },
+      error: (err) => {
+        alert(err.error?.message || 'Erreur suppression');
+      },
+    });
+  }
 }
