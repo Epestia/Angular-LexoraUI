@@ -30,5 +30,5 @@ const userAnswer = 'Echo';
 if (riddle1.checkAnswer(userAnswer)) {
   console.log('Bonne réponse !');
 } else {
-  console.log('Mauvaise réponse !');
+  console.log('Mauvaise réponse ! Dommage !');
 }

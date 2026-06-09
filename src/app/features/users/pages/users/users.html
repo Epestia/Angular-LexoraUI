@@ -2,15 +2,15 @@
 
   <h2>Liste des utilisateurs</h2>
 
-  @if (loading) {
+  @if (loading()) {
     <p>Chargement...</p>
   }
 
-  @if (error) {
-    <p class="error">{{ error }}</p>
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
   }
 
-  @if (!loading && !error) {
+  @if (!loading() && !error()) {
 
     <table class="users-table">
       <thead>
@@ -23,7 +23,7 @@
       </thead>
 
       <tbody>
-        @for (user of users; track user.id) {
+        @for (user of users(); track user.id) {
           <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
@@ -35,12 +35,12 @@
                   Promouvoir Admin
                 </button>
               }
+
               <button
                 [disabled]="user.role.name === 'ADMIN'"
                 (click)="deleteUser(user.id)">
                 Supprimer
               </button>
-
             </td>
           </tr>
         }
