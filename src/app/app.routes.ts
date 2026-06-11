@@ -24,6 +24,12 @@ export const routes: Routes = [
           import('./features/users/pages/users/users').then((c) => c.UsersComponent),
         canActivate: [adminGuard], // 🔥 accès admin only
       },
+
+      {
+        path: 'roles',
+        loadComponent: () => import('./features/users/pages/role/role').then((c) => c.Role),
+        canActivate: [adminGuard], // optionnel mais recommandé 🔐
+      },
     ],
   },
 

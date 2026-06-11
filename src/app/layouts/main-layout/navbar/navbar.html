@@ -9,7 +9,6 @@
       <a routerLink="/">Accueil</a>
     </li>
 
-    <!-- 🔥 CREATE USER (seulement si NON connecté ou selon ton choix) -->
     <li>
       @if (!user()) {
         <a routerLink="/users/create">
@@ -18,14 +17,29 @@
       }
     </li>
 
-    <!-- 🔥 USERS LIST (ADMIN ONLY recommandé) -->
-    <li>
-      @if (user() && user()?.role === 'ADMIN') {
-        <a routerLink="/users">
-          Utilisateurs
+    @if (user() && user()?.role === 'ADMIN') {
+      <li class="dropdown">
+        <a class="dropbtn">
+          Gestion utilisateur ▼
         </a>
-      }
-    </li>
+
+        <ul class="dropdown-content">
+
+          <li>
+            <a routerLink="/users">
+              User List
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/roles">
+              Gestion rôles
+            </a>
+          </li>
+
+        </ul>
+      </li>
+    }
   </ul>
 
   <div class="actions">
