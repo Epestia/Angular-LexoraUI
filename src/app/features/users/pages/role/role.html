@@ -1,10 +1,23 @@
 <h2>Liste des rôles</h2>
 
+<button routerLink="/roles/create" class="btn-create">
+  + Créer un rôle
+</button>
+
 @if (roles().length > 0) {
   <ul>
     @for (role of roles(); track role.id) {
       <li>
         {{ role.id }} - {{ role.name }}
+
+        <button [routerLink]="['/roles/edit', role.id]">
+          Modifier
+        </button>
+
+        <button (click)="deleteRole(role.id)">
+          Supprimer
+        </button>
+
       </li>
     }
   </ul>

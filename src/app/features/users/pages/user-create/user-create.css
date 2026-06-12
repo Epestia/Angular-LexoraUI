@@ -1,0 +1,30 @@
+.container {
+  max-width: 400px;
+  margin: auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 8px;
+}
+
+button {
+  padding: 8px;
+  cursor: pointer;
+  background: green;
+  color: white;
+  border: none;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}

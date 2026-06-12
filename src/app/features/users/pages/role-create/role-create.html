@@ -1,0 +1,31 @@
+<div class="container">
+
+  <h2>Créer un rôle</h2>
+
+  @if (successMessage) {
+    <div class="success">
+      {{ successMessage }}
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="error">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <div class="form">
+
+    <input
+      type="text"
+      placeholder="Nom du rôle (ex: ADMIN)"
+      [(ngModel)]="roleName"
+    />
+
+    <button (click)="createRole()">
+      Créer
+    </button>
+
+  </div>
+
+</div>

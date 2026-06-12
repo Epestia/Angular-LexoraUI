@@ -33,6 +33,12 @@ export const routes: Routes = [
         canActivate: [superAdminGuard],
       },
       {
+        path: 'roles/create',
+        loadComponent: () =>
+          import('./features/users/pages/role-create/role-create').then((c) => c.RoleCreateComponent),
+        canActivate: [superAdminGuard],
+      },
+      {
         path: 'login',
         loadComponent: () => import('./features/auth/pages/login/login').then((c) => c.Login),
       },

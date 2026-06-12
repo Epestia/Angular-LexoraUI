@@ -37,7 +37,7 @@ export class RoleService {
   updateRole(id: number, role: Partial<Role>): Observable<Role> {
     return this.http.put<Role>(`${API_ENDPOINTS.roles}/${id}`, role);
   }
-  
+
   deleteRole(id: number): Observable<void> {
     return this.http.delete<void>(`${API_ENDPOINTS.roles}/${id}`);
   }
