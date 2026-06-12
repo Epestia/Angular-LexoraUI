@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout';
 import { adminGuard } from './core/guards/AdminGuard';
+import { superAdminGuard } from './core/guards/SuperAdminGuard';
 
 export const routes: Routes = [
   {
@@ -22,19 +23,19 @@ export const routes: Routes = [
         path: 'users',
         loadComponent: () =>
           import('./features/users/pages/users/users').then((c) => c.UsersComponent),
-        canActivate: [adminGuard], // 🔥 accès admin only
+        canActivate: [adminGuard],
       },
 
       {
         path: 'roles',
-        loadComponent: () => import('./features/users/pages/role/role').then((c) => c.Role),
-        canActivate: [adminGuard], // optionnel mais recommandé 🔐
+        loadComponent: () =>
+          import('./features/users/pages/role/role').then((c) => c.RoleComponent),
+        canActivate: [superAdminGuard],
+      },
+      {
+        path: 'login',
+        loadComponent: () => import('./features/auth/pages/login/login').then((c) => c.Login),
       },
     ],
-  },
-
-  {
-    path: 'login',
-    loadComponent: () => import('./features/auth/pages/login/login').then((c) => c.Login),
   },
 ];

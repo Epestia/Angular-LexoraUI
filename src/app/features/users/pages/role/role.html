@@ -1,1 +1,13 @@
-<p>role works!</p>
+<h2>Liste des rôles</h2>
+
+@if (roles().length > 0) {
+  <ul>
+    @for (role of roles(); track role.id) {
+      <li>
+        {{ role.id }} - {{ role.name }}
+      </li>
+    }
+  </ul>
+} @else {
+  <p>Aucun rôle trouvé.</p>
+}

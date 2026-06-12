@@ -1,7 +1,7 @@
 <nav class="navbar">
 
   <div class="logo">
-    <a routerLink="/">Mon Application</a>
+    <a routerLink="/">Lexora</a>
   </div>
 
   <ul class="nav-links">
@@ -17,7 +17,7 @@
       }
     </li>
 
-    @if (user() && user()?.role === 'ADMIN') {
+    @if (user() && (user()?.role === 'ADMIN' || user()?.role === 'SUPER_ADMIN')) {
       <li class="dropdown">
         <a class="dropbtn">
           Gestion utilisateur ▼

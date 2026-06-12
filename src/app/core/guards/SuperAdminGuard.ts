@@ -8,10 +8,10 @@ export const superAdminGuard: CanActivateFn = () => {
 
   const user = authService.user();
 
-  if (user?.role?.name === 'SUPER_ADMIN') {
-    return true;
+  if (user?.role !== 'SUPER_ADMIN') {
+    router.navigate(['/']);
+    return false;
   }
 
-  router.navigate(['/']);
-  return false;
+  return true;
 };
