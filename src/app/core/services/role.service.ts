@@ -2,11 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../api/api-endpoints';
+import { Role } from '../models/role';
 
-export interface Role {
-  id: number;
-  name: string;
-}
 
 @Injectable({
   providedIn: 'root',

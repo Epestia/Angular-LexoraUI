@@ -9,6 +9,26 @@
       <a routerLink="/">Accueil</a>
     </li>
 
+    <li class="dropdown">
+      <a class="dropbtn">
+        Decks ▼
+      </a>
+
+      <ul class="dropdown-content">
+        <li>
+          <a routerLink="/decks">
+            Liste des decks
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/decks/create">
+            Créer un deck
+          </a>
+        </li>
+      </ul>
+    </li>
+
     <li>
       @if (!user()) {
         <a routerLink="/users/create">

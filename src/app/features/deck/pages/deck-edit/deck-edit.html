@@ -10,10 +10,15 @@
 
   <select formControlName="status">
     <option value="PRIVATE">PRIVATE</option>
-    <option value="PUBLIC">PUBLIC</option>
-    <option value="DRAFT">DRAFT</option>
+    <option value="PENDING_VALIDATION">PENDING VALIDATION</option>
+    <option value="APPROVED">APPROVED</option>
   </select>
 
-  <button type="submit">Créer</button>
+  @if (authService.isAdmin()) {
+    <input formControlName="validatedById" placeholder="Validator ID">
+    <input formControlName="validationDate" type="date">
+  }
+
+  <button type="submit">Sauvegarder</button>
 
 </form>

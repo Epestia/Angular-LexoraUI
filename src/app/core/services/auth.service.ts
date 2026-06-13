@@ -80,4 +80,11 @@ export class AuthService {
     if (!this.isBrowser()) return null;
     return localStorage.getItem('accessToken');
   }
+  isAdmin(): boolean {
+    const user = this.user();
+    if (!user?.roles) return false;
+
+    return user.roles.includes('ADMIN') || user.roles.includes('SUPER_ADMIN');
+  }
+
 }

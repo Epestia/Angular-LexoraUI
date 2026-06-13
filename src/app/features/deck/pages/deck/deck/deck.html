@@ -1,1 +1,30 @@
-<p>deck works!</p>
+<table class="deck-table">
+  <thead>
+  <tr>
+    <th>Titre</th>
+    <th>Langue</th>
+    <th>Statut</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    @for (deck of decks(); track deck.id) {
+      <tr>
+        <td>{{ deck.title }}</td>
+        <td>{{ deck.language }}</td>
+        <td>{{ deck.status }}</td>
+
+        <td>
+          <button [routerLink]="['/decks/edit', deck.id]">
+            Modifier
+          </button>
+
+          <button (click)="deleteDeck(deck.id!)">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
