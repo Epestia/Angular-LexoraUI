@@ -4,6 +4,7 @@
     <th>Titre</th>
     <th>Langue</th>
     <th>Statut</th>
+    <th>Flashcards</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -16,12 +17,26 @@
         <td>{{ deck.status }}</td>
 
         <td>
+          @for (flashcard of getFlashcards(deck.id); track flashcard.id) {
+            <div class="flashcard-item">
+              <strong>{{ flashcard.frontText }}</strong>
+              → {{ flashcard.backText }}
+            </div>
+          }
+        </td>
+
+        <td>
           <button [routerLink]="['/decks/edit', deck.id]">
             Modifier
           </button>
 
           <button (click)="deleteDeck(deck.id!)">
             Supprimer
+          </button>
+
+          <!-- 🔥 AJOUT ICI -->
+          <button [routerLink]="['/decks', deck.id, 'flashcards', 'create']">
+            + Flashcard
           </button>
         </td>
       </tr>

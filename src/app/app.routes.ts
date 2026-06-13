@@ -3,7 +3,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout';
 import { adminGuard } from './core/guards/AdminGuard';
 import { superAdminGuard } from './core/guards/SuperAdminGuard';
 import {authGuard } from './core/guards/AuthGuard';
-import { DeckCreateComponent } from './features/deck/pages/deck-create/deck-create';
+
 export const routes: Routes = [
   {
     path: '',
@@ -68,6 +68,22 @@ export const routes: Routes = [
         path: 'decks/edit/:id',
         loadComponent: () =>
           import('./features/deck/pages/deck-edit/deck-edit').then((c) => c.DeckEditComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'decks/:deckId/flashcards',
+        loadComponent: () =>
+          import('./features/flashcards/pages/flashcards/flashcards').then(
+            (c) => c.FlashcardsComponent,
+          ),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'decks/:deckId/flashcards/create',
+        loadComponent: () =>
+          import('./features/flashcards/pages/flashcards-create/flashcards-create').then(
+            (c) => c.FlashcardsCreateComponent,
+          ),
         canActivate: [authGuard],
       },
     ],

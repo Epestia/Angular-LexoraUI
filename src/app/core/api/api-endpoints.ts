@@ -7,6 +7,8 @@ export const API_ENDPOINTS = {
 
   decks: `${environment.apiUrl}/api/decks`,
 
+  flashcards: `${environment.apiUrl}/api/flashcards`,
+
   auth: {
     login: `${environment.apiUrl}/auth/login`,
   },
