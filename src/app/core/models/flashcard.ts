@@ -1,5 +1,5 @@
 export interface Flashcard {
-  id?: number;
+  id: number;
   frontText: string;
   backText: string;
   deckId: number;

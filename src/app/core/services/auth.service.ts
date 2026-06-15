@@ -86,5 +86,16 @@ export class AuthService {
 
     return user.roles.includes('ADMIN') || user.roles.includes('SUPER_ADMIN');
   }
+  getUserId(): number {
+    const user = this.user();
+
+    if (!user) {
+      const stored = localStorage.getItem('user');
+      if (!stored) return 0;
+      return JSON.parse(stored).id;
+    }
+
+    return user.id;
+  }
 
 }

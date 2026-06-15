@@ -1,0 +1,44 @@
+<h2>Create Study Session</h2>
+
+<!-- DECK -->
+<label>Deck</label>
+<select
+  [(ngModel)]="selectedDeckId"
+  (ngModelChange)="onDeckChange()"
+>
+
+  <option [ngValue]="null">Select deck</option>
+
+  @for (deck of decks(); track deck.id) {
+    <option [value]="deck.id">
+      {{ deck.title }}
+    </option>
+  }
+</select>
+
+<!-- FLASHCARDS -->
+<label>Flashcard</label>
+<select
+  [(ngModel)]="selectedFlashcardId"
+>
+
+  <option [ngValue]="null">Select flashcard</option>
+
+  @for (card of flashcards(); track $index) {
+    <option [value]="card.id">
+      {{ card.frontText }}
+    </option>
+  }
+</select>
+
+<!-- DEBUG -->
+<p>Deck: {{ selectedDeckId }}</p>
+<p>Flashcard: {{ selectedFlashcardId }}</p>
+
+<!-- ACTION -->
+<button
+  (click)="createStudySession()"
+  [disabled]="!selectedDeckId || !selectedFlashcardId"
+>
+  Start Study Session
+</button>

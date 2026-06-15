@@ -1,45 +1,91 @@
-<table class="deck-table">
-  <thead>
-  <tr>
-    <th>Titre</th>
-    <th>Langue</th>
-    <th>Statut</th>
-    <th>Flashcards</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
+<div class="deck-container">
 
-  <tbody>
-    @for (deck of decks(); track deck.id) {
-      <tr>
-        <td>{{ deck.title }}</td>
-        <td>{{ deck.language }}</td>
-        <td>{{ deck.status }}</td>
+  @for (deck of decks(); track deck.id ?? $index) {
 
-        <td>
-          @for (flashcard of getFlashcards(deck.id); track flashcard.id) {
-            <div class="flashcard-item">
-              <strong>{{ flashcard.frontText }}</strong>
-              → {{ flashcard.backText }}
+    <p-card class="deck-card">
+
+      <ng-template pTemplate="header">
+        <div class="deck-header">
+          <h2>{{ deck.title }}</h2>
+
+          <p-tag
+            [value]="deck.status"
+            [severity]="getStatusSeverity(deck.status)">
+          </p-tag>
+        </div>
+      </ng-template>
+
+      <div class="deck-meta">
+        <span>{{ deck.language }}</span>
+        <span>{{ getFlashcards(deck.id).length }} flashcards</span>
+      </div>
+
+      <!-- FLASHCARDS -->
+      <div class="flashcards">
+
+        @for (flashcard of getFlashcards(deck.id); track flashcard.id ?? $index) {
+
+          <div class="flashcard">
+
+            <div class="front">
+              {{ flashcard.frontText }}
             </div>
-          }
-        </td>
 
-        <td>
-          <button [routerLink]="['/decks/edit', deck.id]">
-            Modifier
-          </button>
+            <div class="flip-icon">
+              ↺
+            </div>
 
-          <button (click)="deleteDeck(deck.id!)">
-            Supprimer
-          </button>
+            <div class="back">
+              {{ flashcard.backText }}
+            </div>
 
-          <!-- 🔥 AJOUT ICI -->
-          <button [routerLink]="['/decks', deck.id, 'flashcards', 'create']">
-            + Flashcard
-          </button>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+            <!-- FLASHCARD ACTIONS -->
+            <div class="flashcard-actions">
+
+              <p-button
+                icon="pi pi-language"
+                severity="help"
+                label="Translations"
+                [routerLink]="['/flashcards', flashcard.id, 'translations']">
+              </p-button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+      <!-- ACTIONS DECK -->
+      <div class="actions">
+
+        <p-button
+          icon="pi pi-pencil"
+          severity="info"
+          label="Edit"
+          [routerLink]="['/decks/edit', deck.id]">
+        </p-button>
+
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          label="Supprimer"
+          (click)="deleteDeck(deck.id!)">
+        </p-button>
+
+        <p-button
+          icon="pi pi-plus"
+          severity="success"
+          label="Créer flashcard"
+          [routerLink]="['/decks', deck.id, 'flashcards', 'create']">
+        </p-button>
+
+
+      </div>
+
+    </p-card>
+
+  }
+
+</div>

@@ -1,0 +1,66 @@
+<div class="translation-container">
+
+  <h2>Translations</h2>
+
+  @if (loading) {
+    <p>Chargement...</p>
+  }
+
+  @if (!loading && translations.length === 0) {
+    <p>Aucune traduction pour cette flashcard 🎯</p>
+  }
+
+  @if (!loading) {
+
+    @for (t of translations; track t.id) {
+
+      <p-card class="translation-card">
+
+        <ng-template pTemplate="header">
+          <div class="translation-header">
+            <h3>{{ t.translatedText }}</h3>
+            <span class="lang">{{ t.learnerLanguage }}</span>
+          </div>
+        </ng-template>
+
+        <div class="translation-body">
+          <p><strong>Flashcard ID:</strong> {{ t.flashcardId }}</p>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <div class="actions">
+
+            <button
+              pButton
+              icon="pi pi-comments"
+              label="Phrases"
+              [routerLink]="['/translations', t.id, 'sentences']">
+            </button>
+
+            <button
+              pButton
+              icon="pi pi-trash"
+              severity="danger"
+              label="Supprimer"
+              (click)="deleteTranslation(t.id)">
+            </button>
+
+          </div>
+        </ng-template>
+
+      </p-card>
+
+    }
+
+  }
+
+  <div class="add-btn">
+    <button
+      pButton
+      icon="pi pi-plus"
+      label="Ajouter une traduction"
+      [routerLink]="['create']">
+    </button>
+  </div>
+
+</div>

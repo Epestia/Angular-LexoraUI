@@ -1,85 +1,47 @@
-<nav class="navbar">
+<p-menubar [model]="items">
 
-  <div class="logo">
-    <a routerLink="/">Lexora</a>
-  </div>
+  <ng-template pTemplate="start">
+    <a class="logo" routerLink="/">
+      Lexora
+    </a>
+  </ng-template>
 
-  <ul class="nav-links">
-    <li>
-      <a routerLink="/">Accueil</a>
-    </li>
-
-    <li class="dropdown">
-      <a class="dropbtn">
-        Decks ▼
-      </a>
-
-      <ul class="dropdown-content">
-        <li>
-          <a routerLink="/decks">
-            Liste des decks
-          </a>
-        </li>
-
-        <li>
-          <a routerLink="/decks/create">
-            Créer un deck
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <li>
-      @if (!user()) {
-        <a routerLink="/users/create">
-          Créer utilisateur
-        </a>
-      }
-    </li>
-
-    @if (user() && (user()?.role === 'ADMIN' || user()?.role === 'SUPER_ADMIN')) {
-      <li class="dropdown">
-        <a class="dropbtn">
-          Gestion utilisateur ▼
-        </a>
-
-        <ul class="dropdown-content">
-
-          <li>
-            <a routerLink="/users">
-              User List
-            </a>
-          </li>
-
-          <li>
-            <a routerLink="/roles">
-              Gestion rôles
-            </a>
-          </li>
-
-        </ul>
-      </li>
-    }
-  </ul>
-
-  <div class="actions">
+  <ng-template pTemplate="end">
 
     @if (!user()) {
-      <a routerLink="/login" class="btn">
-        Connexion
-      </a>
+
+      <button
+        pButton
+        label="Créer un compte"
+        icon="pi pi-user-plus"
+        class="p-button-secondary"
+        (click)="goToRegister()">
+      </button>
+
+      <button
+        pButton
+        label="Connexion"
+        icon="pi pi-sign-in"
+        (click)="goToLogin()">
+      </button>
+
     }
 
     @if (user()) {
-      <div class="user-info">
-        Bonjour {{ user()?.sub }}
-      </div>
 
-      <button (click)="logout()">
-        Logout
+      <span class="user">
+        {{ user()?.sub }}
+      </span>
+
+      <button
+        pButton
+        icon="pi pi-sign-out"
+        severity="danger"
+        label="Déconnexion"
+        (click)="logout()">
       </button>
     }
 
-  </div>
+  </ng-template>
 
-</nav>
+</p-menubar>

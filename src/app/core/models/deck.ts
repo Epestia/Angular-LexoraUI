@@ -1,7 +1,8 @@
+
 export type DeckStatus = 'PRIVATE' | 'PENDING_VALIDATION' | 'APPROVED';
 
 export interface Deck {
-  id?: number;
+  id: number;
   title: string;
   language: string;
   isPublic: boolean;

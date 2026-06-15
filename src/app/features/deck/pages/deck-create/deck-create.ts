@@ -1,13 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { DeckService } from '../../../../core/services/deck.service';
 import { DeckStatus } from '../../../../core/models/deck';
+
+// ✅ PrimeNG imports
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-deck-create',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputTextModule, CheckboxModule,  ButtonModule],
   templateUrl: './deck-create.html',
 })
 export class DeckCreateComponent {

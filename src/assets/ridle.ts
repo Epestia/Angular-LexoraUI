@@ -26,6 +26,7 @@ const riddle1 = new Riddle(
 riddle1.showQuestion();
 
 const userAnswer = 'Echo';
+const question = 'je me demande si ?';
 
 if (riddle1.checkAnswer(userAnswer)) {
   console.log('Bonne réponse !');

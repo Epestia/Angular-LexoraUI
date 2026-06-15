@@ -18,25 +18,32 @@ export class FlashcardsCreateComponent implements OnInit {
   private router = inject(Router);
   private flashcardService = inject(FlashcardService);
 
-  deckId!: number;
+  deckId: number = 0;
 
   flashcard: Flashcard = {
+    id: 0,
     frontText: '',
     backText: '',
     deckId: 0,
   };
 
   ngOnInit(): void {
-    this.deckId = Number(this.route.snapshot.paramMap.get('deckId'));
+    const id = this.route.snapshot.paramMap.get('deckId');
+    this.deckId = id ? Number(id) : 0;
+
     this.flashcard.deckId = this.deckId;
   }
 
   create(): void {
+    if (!this.deckId) return;
+
+    this.flashcard.deckId = this.deckId;
+
     this.flashcardService.create(this.flashcard).subscribe({
       next: () => {
-        this.router.navigate(['/decks', this.deckId, 'flashcards']);
+        this.router.navigate(['/decks']);
       },
-      error: (err) => console.error(err),
+      error: (err: unknown) => console.error(err),
     });
   }
 }
