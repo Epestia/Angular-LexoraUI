@@ -15,11 +15,20 @@ import { userFlashcardProgressService } from '../../../../../core/services/user-
 
 import { Deck } from '../../../../../core/models/deck';
 import { Flashcard } from '../../../../../core/models/flashcard';
+import { CapitalizePipe } from '../../../../../shared/pipes/capitalize.pipe';
 
 @Component({
   selector: 'app-deck',
   standalone: true,
-  imports: [CommonModule, RouterLink, TableModule, ButtonModule, TagModule, CardModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    TableModule,
+    ButtonModule,
+    TagModule,
+    CardModule,
+    CapitalizePipe,
+  ],
   templateUrl: './deck.html',
   styleUrl: './deck.css',
 })

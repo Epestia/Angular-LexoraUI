@@ -126,6 +126,17 @@ export const routes: Routes = [
           ),
         canActivate: [authGuard],
       },
+      {
+        path: 'quiz',
+        loadComponent: () => import('./features/quiz/pages/quiz/quiz').then((c) => c.QuizComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'quiz/all',
+        loadComponent: () =>
+          import('./features/quiz/pages/quiz-all/quiz-all').then((c) => c.QuizAllComponent),
+        canActivate: [authGuard],
+      },
     ],
   },
 ];

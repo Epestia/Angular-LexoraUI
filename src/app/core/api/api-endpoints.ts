@@ -22,4 +22,6 @@ export const API_ENDPOINTS = {
   auth: {
     login: `${environment.apiUrl}/auth/login`,
   },
+
+  quiz: `${environment.apiUrl}/api/quizzes`,
 };

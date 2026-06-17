@@ -1,0 +1,99 @@
+<h2>Quiz</h2>
+
+<!-- ================= DECK LIST ================= -->
+@if (!quizStarted()) {
+
+  <h3>Choisir un deck</h3>
+
+  <div class="deck-list">
+
+    @for (deck of decks(); track deck.id) {
+
+      <div class="deck-card">
+
+        <h4>{{ deck.title | capitalize }}</h4>
+
+        <p>{{ deck.id | deckLabel }}</p>
+
+        <button
+          pButton
+          label="Lancer le quiz"
+          icon="pi pi-play"
+          (click)="startQuiz(deck.id)">
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+}
+
+<!-- ================= QUIZ ================= -->
+@if (quizStarted() && !quizFinished() && currentFlashcard) {
+
+  <div class="quiz-box">
+
+    <h3>{{ currentFlashcard.frontText | capitalize }}</h3>
+
+    <input
+      pInputText
+      [ngModel]="answer()"
+      (ngModelChange)="answer.set($event)"
+      placeholder="Votre réponse"
+    />
+
+    <br><br>
+
+    <button
+      pButton
+      label="Valider"
+      icon="pi pi-check"
+      (click)="submitAnswer()">
+    </button>
+
+  </div>
+
+}
+
+<!-- ================= RESULT ================= -->
+@if (quizFinished()) {
+
+  <div class="result">
+
+    <h2>Résultat 🎉</h2>
+
+    <p>
+      Score :
+      <strong>
+        {{ score | quizScore:total }}
+      </strong>
+    </p>
+
+    <p>
+      Réussite :
+      <strong>
+        {{ score | percentageScore:total }}
+      </strong>
+    </p>
+
+    <button
+      pButton
+      label="Enregistrer"
+      icon="pi pi-save"
+      severity="success"
+      (click)="saveQuiz()">
+    </button>
+
+    <button
+      pButton
+      label="Recommencer"
+      icon="pi pi-refresh"
+      class="p-button-secondary"
+      (click)="restart()">
+    </button>
+
+  </div>
+
+}

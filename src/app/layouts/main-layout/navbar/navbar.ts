@@ -71,6 +71,28 @@ export class Navbar implements OnInit {
         ],
       },
 
+      ...(this.user()
+        ? [
+            {
+              label: 'Quiz',
+              icon: 'pi pi-question-circle',
+              items: [
+                {
+                  label: 'Lancer un quiz',
+                  icon: 'pi pi-play-circle',
+                  routerLink: '/quiz',
+                },
+                {
+                  label: 'Mes résultats',
+                  icon: 'pi pi-chart-bar',
+                  routerLink: '/quiz/all',
+                },
+              ],
+            },
+          ]
+        : []),
+
+      // ===================== ADMIN =====================
       ...(this.user() && (this.user()?.role === 'ADMIN' || this.user()?.role === 'SUPER_ADMIN')
         ? [
             {
