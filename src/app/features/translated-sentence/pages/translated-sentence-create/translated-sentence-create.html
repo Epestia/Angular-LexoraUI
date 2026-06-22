@@ -1,0 +1,50 @@
+<div class="container">
+
+  <h2>Créer une phrase traduite</h2>
+
+  <!-- sentence -->
+  <div class="mb-3">
+    <label>Phrase originale</label>
+    <input class="form-control"
+           [(ngModel)]="sentence.sentence">
+  </div>
+
+  <!-- translated sentence -->
+  <div class="mb-3">
+    <label>Traduction</label>
+    <input class="form-control"
+           [(ngModel)]="sentence.translatedSentence">
+  </div>
+
+  <!-- translation select -->
+  <div class="mb-3">
+    <label>Translation</label>
+
+    @if (translations().length === 0) {
+      <p>Chargement...</p>
+    } @else {
+
+      <select class="form-select"
+              [(ngModel)]="sentence.translationId">
+
+        <option [ngValue]="0">
+          -- choisir une traduction --
+        </option>
+
+        @for (t of translations(); track t.id) {
+          <option [ngValue]="t.id">
+            {{ t.translatedText }}
+          </option>
+        }
+
+      </select>
+
+    }
+  </div>
+
+  <button class="btn btn-primary"
+          (click)="save()">
+    Créer
+  </button>
+
+</div>

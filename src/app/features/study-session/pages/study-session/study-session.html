@@ -16,13 +16,28 @@
 
       <ng-template pTemplate="header">
         <div class="header">
+
           <span>Flashcard #{{ session.flashcardId }}</span>
 
-          <span
-            class="tag"
-            [ngClass]="session.known ? 'tag-success' : 'tag-warning'">
-  {{ session.known ? 'Connue' : 'À revoir' }}
-</span>
+          <div class="actions">
+
+            <span
+              class="tag"
+              [ngClass]="session.known ? 'tag-success' : 'tag-warning'">
+              {{ session.known ? 'Connue' : 'À revoir' }}
+            </span>
+
+            <button
+              pButton
+              type="button"
+              icon="pi pi-pencil"
+              label="Modifier"
+              class="p-button-sm p-button-secondary"
+              (click)="session.id && editSession(session.id)">
+            </button>
+
+          </div>
+
         </div>
       </ng-template>
 

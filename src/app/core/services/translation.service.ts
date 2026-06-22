@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../api/api-endpoints';
 import { Translation } from '../models/translation';
+import { Flashcard } from '../models/flashcard'
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,10 @@ export class TranslationService {
     return this.http.get<Translation>(`${this.apiUrl}/${id}`);
   }
 
+  getByFlashcardId(flashcardId: number): Observable<Translation[]> {
+    return this.http.get<Translation[]>(`${this.apiUrl}/flashcard/${flashcardId}`);
+  }
+
   create(translation: Translation): Observable<Translation> {
     return this.http.post<Translation>(this.apiUrl, translation);
   }
@@ -31,4 +36,6 @@ export class TranslationService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+
 }

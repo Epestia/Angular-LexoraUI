@@ -7,6 +7,8 @@ import { Flashcard } from '../models/flashcard';
 
 @Injectable({ providedIn: 'root' })
 export class userFlashcardProgressService {
+  private apiUrl = API_ENDPOINTS.userProgress;
+
   constructor(private http: HttpClient) {}
 
   getDecks() {
@@ -18,10 +20,18 @@ export class userFlashcardProgressService {
   }
 
   getByUserId(userId: number) {
-    return this.http.get<UserFlashcardProgress[]>(`${API_ENDPOINTS.userProgress}/user/${userId}`);
+    return this.http.get<UserFlashcardProgress[]>(`${this.apiUrl}/user/${userId}`);
+  }
+
+  getById(id: number) {
+    return this.http.get<UserFlashcardProgress>(`${this.apiUrl}/${id}`);
   }
 
   create(progress: UserFlashcardProgress) {
-    return this.http.post<UserFlashcardProgress>(API_ENDPOINTS.userProgress, progress);
+    return this.http.post<UserFlashcardProgress>(this.apiUrl, progress);
+  }
+
+  update(id: number, session: UserFlashcardProgress) {
+    return this.http.put<UserFlashcardProgress>(`${this.apiUrl}/${id}`, session);
   }
 }

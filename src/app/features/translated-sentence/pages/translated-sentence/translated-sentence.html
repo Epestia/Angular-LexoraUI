@@ -1,1 +1,52 @@
-<p>translated-sentence works!</p>
+<div class="container">
+
+  <h2>Phrases traduites</h2>
+
+  <button
+    class="btn btn-primary mb-3"
+    (click)="goToCreate()">
+    Créer une phrase traduite
+  </button>
+
+  @if (sentences().length === 0) {
+
+    <p>Aucune phrase trouvée.</p>
+
+  } @else {
+
+    <table class="table table-striped">
+
+      <thead>
+      <tr>
+        <th>Phrase</th>
+        <th>Traduction</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+        @for (sentence of sentences(); track sentence.id) {
+
+          <tr>
+            <td>{{ sentence.sentence }}</td>
+            <td>{{ sentence.translatedSentence }}</td>
+
+            <td>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteSentence(sentence.id!)">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  }
+
+</div>

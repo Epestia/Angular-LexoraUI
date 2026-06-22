@@ -1,7 +1,6 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { forkJoin } from 'rxjs';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -11,7 +10,6 @@ import { CardModule } from 'primeng/card';
 import { DeckService } from '../../../../../core/services/deck.service';
 import { FlashcardService } from '../../../../../core/services/flashcard.service';
 import { AuthService } from '../../../../../core/services/auth.service';
-import { userFlashcardProgressService } from '../../../../../core/services/user-flashcard-progress-service';
 
 import { Deck } from '../../../../../core/models/deck';
 import { Flashcard } from '../../../../../core/models/flashcard';
@@ -33,10 +31,11 @@ import { CapitalizePipe } from '../../../../../shared/pipes/capitalize.pipe';
   styleUrl: './deck.css',
 })
 export class DeckComponent implements OnInit {
+
   private deckService = inject(DeckService);
   private flashcardService = inject(FlashcardService);
-  private authService = inject(AuthService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   decks = signal<Deck[]>([]);
   flashcardsByDeck = signal<Record<number, Flashcard[]>>({});
@@ -48,6 +47,9 @@ export class DeckComponent implements OnInit {
     this.loadMyDecks();
   }
 
+  // ----------------------------
+  // LOAD DECKS
+  // ----------------------------
   loadMyDecks(): void {
     this.loading.set(true);
 
@@ -64,6 +66,9 @@ export class DeckComponent implements OnInit {
     });
   }
 
+  // ----------------------------
+  // LOAD FLASHCARDS
+  // ----------------------------
   loadFlashcards(decks: Deck[]): void {
     const map: Record<number, Flashcard[]> = {};
 
@@ -80,11 +85,17 @@ export class DeckComponent implements OnInit {
     });
   }
 
+  // ----------------------------
+  // GET FLASHCARDS BY DECK
+  // ----------------------------
   getFlashcards(deckId?: number): Flashcard[] {
     if (!deckId) return [];
     return this.flashcardsByDeck()[deckId] ?? [];
   }
 
+  // ----------------------------
+  // DELETE DECK
+  // ----------------------------
   deleteDeck(id: number): void {
     if (!confirm('Supprimer ce deck ?')) return;
 
@@ -102,6 +113,21 @@ export class DeckComponent implements OnInit {
     });
   }
 
+  // ----------------------------
+  // TRANSLATION CREATE ACTION
+  // ----------------------------
+  openCreateTranslation(flashcardId: number): void {
+    this.router.navigate(
+      ['/flashcards', flashcardId, 'translations'],
+      {
+        queryParams: { mode: 'create' }
+      }
+    );
+  }
+
+  // ----------------------------
+  // STATUS UI
+  // ----------------------------
   getStatusSeverity(status: string): 'success' | 'warn' | 'danger' | 'info' {
     switch (status) {
       case 'ACTIVE':

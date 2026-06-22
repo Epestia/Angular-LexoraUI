@@ -10,13 +10,11 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      // ===================== HOME =====================
       {
         path: '',
         loadComponent: () => import('./features/home/home').then((c) => c.HomeComponent),
       },
 
-      // ===================== USERS =====================
       {
         path: 'users/create',
         loadComponent: () =>
@@ -28,8 +26,6 @@ export const routes: Routes = [
           import('./features/users/pages/users/users').then((c) => c.UsersComponent),
         canActivate: [adminGuard],
       },
-
-      // ===================== ROLES =====================
       {
         path: 'roles',
         loadComponent: () =>
@@ -45,13 +41,10 @@ export const routes: Routes = [
         canActivate: [superAdminGuard],
       },
 
-      // ===================== AUTH =====================
       {
         path: 'login',
         loadComponent: () => import('./features/auth/pages/login/login').then((c) => c.Login),
       },
-
-      // ===================== DECKS =====================
       {
         path: 'decks',
         loadComponent: () =>
@@ -72,8 +65,6 @@ export const routes: Routes = [
           import('./features/deck/pages/deck-edit/deck-edit').then((c) => c.DeckEditComponent),
         canActivate: [authGuard],
       },
-
-      // ===================== FLASHCARDS =====================
       {
         path: 'decks/:deckId/flashcards',
         loadComponent: () =>
@@ -90,10 +81,8 @@ export const routes: Routes = [
           ),
         canActivate: [authGuard],
       },
-
-      // ===================== TRANSLATIONS =====================
       {
-        path: 'flashcards/:flashcardId/translations',
+        path: 'translations',
         loadComponent: () =>
           import('./features/translation/pages/translation/translation').then(
             (c) => c.TranslationComponent,
@@ -101,15 +90,13 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
-        path: 'flashcards/:flashcardId/translations/create',
+        path: 'translations/create',
         loadComponent: () =>
           import('./features/translation/pages/translation-create/translation-create').then(
             (c) => c.TranslationCreateComponent,
           ),
         canActivate: [authGuard],
       },
-
-      // ===================== STUDY SESSION =====================
       {
         path: 'study-session/create',
         loadComponent: () =>
@@ -127,6 +114,29 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
+        path: 'study-session/edit/:id',
+        loadComponent: () =>
+          import('./features/study-session/pages/study-session-edit/study-session-edit').then(
+            (c) => c.StudySessionEditComponent,
+          ),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'translated-sentences/create',
+        loadComponent: () =>
+          import('./features/translated-sentence/pages/translated-sentence-create/translated-sentence-create').then(
+            (c) => c.TranslatedSentenceCreate,
+          ),
+      },
+      {
+        path: 'translated-sentences',
+        loadComponent: () =>
+          import('./features/translated-sentence/pages/translated-sentence/translated-sentence').then(
+            (c) => c.TranslatedSentenceComponent,
+          ),
+        canActivate: [authGuard],
+      },
+      {
         path: 'quiz',
         loadComponent: () => import('./features/quiz/pages/quiz/quiz').then((c) => c.QuizComponent),
         canActivate: [authGuard],
@@ -138,5 +148,9 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];

@@ -10,10 +10,6 @@
       <li>
         {{ role.id }} - {{ role.name }}
 
-        <button [routerLink]="['/roles/edit', role.id]">
-          Modifier
-        </button>
-
         <button (click)="deleteRole(role.id)">
           Supprimer
         </button>

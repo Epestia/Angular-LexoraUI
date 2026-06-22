@@ -1,1 +1,50 @@
-<p>translation-create works!</p>
+<div class="container">
+
+  <h2>Créer une traduction</h2>
+
+  <!-- Texte traduit -->
+  <div class="mb-3">
+    <label>Texte traduit</label>
+    <input class="form-control"
+           [(ngModel)]="translation.translatedText">
+  </div>
+
+  <!-- Langue -->
+  <div class="mb-3">
+    <label>Langue de l'apprenant</label>
+    <input class="form-control"
+           [(ngModel)]="translation.learnerLanguage">
+  </div>
+
+  <!-- Flashcards -->
+  <div class="mb-3">
+    <label>Flashcard</label>
+
+    @if (flashcards$ | async; as flashcards) {
+
+      <select class="form-select"
+              [(ngModel)]="translation.flashcardId">
+
+        <option [ngValue]="null">
+          -- Sélectionner une flashcard --
+        </option>
+
+        @for (f of flashcards; track f.id) {
+          <option [ngValue]="f.id">
+            {{ f.frontText }}
+          </option>
+        }
+
+      </select>
+
+    } @else {
+      <p>Chargement...</p>
+    }
+
+  </div>
+
+  <button class="btn btn-primary" (click)="save()">
+    Enregistrer
+  </button>
+
+</div>

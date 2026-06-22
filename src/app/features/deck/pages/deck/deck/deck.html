@@ -2,9 +2,7 @@
 
   @for (deck of decks(); track deck.id ?? $index) {
 
-    <p-card
-      class="deck-card"
-      appHoverHighlight>
+    <p-card class="deck-card" appHoverHighlight>
 
       <ng-template pTemplate="header">
         <div class="deck-header">
@@ -18,7 +16,7 @@
       </ng-template>
 
       <div class="deck-meta">
-        <span>{{ deck.language | uppercase }}</span>
+        <span>{{ deck.language }}</span>
         <span>{{ getFlashcards(deck.id).length }} flashcards</span>
       </div>
 
@@ -41,17 +39,6 @@
               {{ flashcard.backText | capitalize }}
             </div>
 
-            <!-- FLASHCARD ACTIONS -->
-            <div class="flashcard-actions">
-
-              <p-button
-                icon="pi pi-language"
-                severity="help"
-                label="Translations"
-                [routerLink]="['/flashcards', flashcard.id, 'translations']">
-              </p-button>
-
-            </div>
 
           </div>
 

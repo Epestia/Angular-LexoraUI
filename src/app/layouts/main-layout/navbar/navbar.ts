@@ -89,6 +89,38 @@ export class Navbar implements OnInit {
                 },
               ],
             },
+            {
+              label: 'Traductions',
+              icon: 'pi pi-language',
+              items: [
+                {
+                  label: 'Liste des traductions',
+                  icon: 'pi pi-list',
+                  routerLink: '/translations',
+                },
+                {
+                  label: 'Créer une traduction',
+                  icon: 'pi pi-plus',
+                  routerLink: '/translations/create',
+                },
+              ],
+            },
+            {
+              label: 'Phrases traduites',
+              icon: 'pi pi-comment',
+              items: [
+                {
+                  label: 'Liste des phrases',
+                  icon: 'pi pi-list',
+                  routerLink: '/translated-sentences',
+                },
+                {
+                  label: 'Créer une phrase',
+                  icon: 'pi pi-plus',
+                  routerLink: '/translated-sentences/create',
+                },
+              ],
+            },
           ]
         : []),
 

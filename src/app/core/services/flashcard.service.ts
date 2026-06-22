@@ -27,12 +27,15 @@ export class FlashcardService {
     return this.http.post<Flashcard>(API_ENDPOINTS.flashcards, flashcard);
   }
 
-
   update(id: number, flashcard: Flashcard): Observable<Flashcard> {
     return this.http.put<Flashcard>(`${API_ENDPOINTS.flashcards}/${id}`, flashcard);
   }
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${API_ENDPOINTS.flashcards}/${id}`);
+  }
+
+  getMyFlashcards(): Observable<Flashcard[]> {
+    return this.http.get<Flashcard[]>(`${API_ENDPOINTS.flashcards}/my-flashcards`);
   }
 }

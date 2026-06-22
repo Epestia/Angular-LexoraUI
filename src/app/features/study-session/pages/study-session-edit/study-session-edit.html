@@ -1,1 +1,45 @@
-<p>study-session-edit works!</p>
+<div class="container">
+
+  <h2>Modifier la session d'étude</h2>
+
+  @if (!session()) {
+    <p>Chargement...</p>
+  } @else {
+
+    <div class="mb-3">
+      <label>Répétition</label>
+      <input type="number"
+             class="form-control"
+             [(ngModel)]="session()!.repetitionLevel">
+    </div>
+
+    <div class="mb-3">
+      <label>Révisions</label>
+      <input type="number"
+             class="form-control"
+             [(ngModel)]="session()!.timesReviewed">
+    </div>
+
+    <div class="mb-3">
+      <label>Connue</label>
+      <select class="form-select"
+              [(ngModel)]="session()!.known">
+        <option [ngValue]="true">Oui</option>
+        <option [ngValue]="false">Non</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Prochaine révision</label>
+      <input type="date"
+             class="form-control"
+             [(ngModel)]="session()!.nextReviewDate">
+    </div>
+
+    <button class="btn btn-primary" (click)="save()">
+      Sauvegarder
+    </button>
+
+  }
+
+</div>

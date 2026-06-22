@@ -31,4 +31,8 @@ export class TranslatedSentenceService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getMySentences(): Observable<TranslatedSentence[]> {
+    return this.http.get<TranslatedSentence[]>(`${this.apiUrl}/my-sentences`);
+  }
 }

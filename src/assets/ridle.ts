@@ -14,7 +14,7 @@ class Riddle {
   }
 
   showQuestion(): void {
-    console.log(`🧩 Riddle: ${this.question}`);
+    console.log(`Riddle: ${this.question}`);
   }
 }
 

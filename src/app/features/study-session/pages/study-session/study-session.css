@@ -19,6 +19,12 @@
   padding: 10px;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .content p {
   margin: 5px 0;
 }
