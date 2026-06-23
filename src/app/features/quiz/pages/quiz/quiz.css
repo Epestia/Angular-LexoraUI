@@ -1,0 +1,24 @@
+.deck-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.deck-card {
+  cursor: pointer;
+}
+
+.quiz-box {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.result {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.w-full {
+  width: 100%;
+}

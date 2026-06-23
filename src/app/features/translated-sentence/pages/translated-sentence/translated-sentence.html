@@ -1,52 +1,49 @@
-<div class="container">
+<div class="page">
 
   <h2>Phrases traduites</h2>
 
   <button
-    class="btn btn-primary mb-3"
-    (click)="goToCreate()">
-    Créer une phrase traduite
-  </button>
+    pButton
+    label="Créer une phrase traduite"
+    icon="pi pi-plus"
+    class="mb-3"
+    (click)="goToCreate()"
+  ></button>
 
-  @if (sentences().length === 0) {
+  <p-table
+    [value]="sentences()"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    *ngIf="sentences().length > 0; else empty"
+  >
 
-    <p>Aucune phrase trouvée.</p>
-
-  } @else {
-
-    <table class="table table-striped">
-
-      <thead>
+    <ng-template pTemplate="header">
       <tr>
         <th>Phrase</th>
         <th>Traduction</th>
         <th>Actions</th>
       </tr>
-      </thead>
+    </ng-template>
 
-      <tbody>
+    <ng-template pTemplate="body" let-sentence>
+      <tr>
+        <td>{{ sentence.sentence }}</td>
+        <td>{{ sentence.translatedSentence }}</td>
 
-        @for (sentence of sentences(); track sentence.id) {
+        <td>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger p-button-sm"
+            (click)="deleteSentence(sentence.id!)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
 
-          <tr>
-            <td>{{ sentence.sentence }}</td>
-            <td>{{ sentence.translatedSentence }}</td>
+  </p-table>
 
-            <td>
-              <button
-                class="btn btn-danger btn-sm"
-                (click)="deleteSentence(sentence.id!)">
-                Supprimer
-              </button>
-            </td>
-          </tr>
-
-        }
-
-      </tbody>
-
-    </table>
-
-  }
+  <ng-template #empty>
+    <p>Aucune phrase trouvée.</p>
+  </ng-template>
 
 </div>

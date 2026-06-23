@@ -6,10 +6,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { userFlashcardProgressService } from '../../../../core/services/user-flashcard-progress-service';
 import { UserFlashcardProgress } from '../../../../core/models/UserFlashcardProgress';
 
+import { InputNumberModule } from 'primeng/inputnumber';
+
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-study-session-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CardModule,
+    InputNumberModule,
+    ButtonModule,
+  ],
   templateUrl: './study-session-edit.html',
   styleUrl: './study-session-edit.css',
 })

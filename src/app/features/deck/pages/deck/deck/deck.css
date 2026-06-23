@@ -5,19 +5,17 @@
   padding: 2rem;
 }
 
-/* CARD */
 .deck-card {
   border-radius: 16px;
 }
 
-/* HEADER */
+
 .deck-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* META INFO */
 .deck-meta {
   display: flex;
   justify-content: space-between;
@@ -25,7 +23,7 @@
   font-size: 0.9rem;
 }
 
-/* FLASHCARD STYLE */
+
 .flashcards {
   display: flex;
   flex-direction: column;
@@ -55,7 +53,6 @@
   opacity: 0.5;
 }
 
-/* ACTIONS */
 .actions {
   display: flex;
   gap: 0.5rem;

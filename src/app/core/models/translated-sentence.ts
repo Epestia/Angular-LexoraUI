@@ -4,5 +4,5 @@ export interface TranslatedSentence {
   sentence: string;
   translatedSentence: string;
 
-  translationId: number;
+  translationId: number | null;
 }

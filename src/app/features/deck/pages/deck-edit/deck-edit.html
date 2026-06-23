@@ -1,24 +1,74 @@
-<form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
+<div class="page">
+  <div class="card">
+    <h2>Modifier le deck</h2>
 
-  <input formControlName="title" placeholder="Titre">
-  <input formControlName="language" placeholder="Langue">
+    <form [formGroup]="deckForm" (ngSubmit)="onSubmit()" class="p-fluid">
 
-  <label>
-    Public
-    <input type="checkbox" formControlName="isPublic">
-  </label>
+      <div class="field">
+        <label for="title">Titre</label>
+        <input id="title" pInputText formControlName="title" />
+      </div>
 
-  <select formControlName="status">
-    <option value="PRIVATE">PRIVATE</option>
-    <option value="PENDING_VALIDATION">PENDING VALIDATION</option>
-    <option value="APPROVED">APPROVED</option>
-  </select>
 
-  @if (authService.isAdmin()) {
-    <input formControlName="validatedById" placeholder="Validator ID">
-    <input formControlName="validationDate" type="date">
-  }
+      <div class="field">
+        <label for="language">Langue</label>
+        <input id="language" pInputText formControlName="language" />
+      </div>
 
-  <button type="submit">Sauvegarder</button>
 
-</form>
+      <div class="field-checkbox">
+        <p-checkbox
+          formControlName="isPublic"
+          [binary]="true"
+          inputId="isPublic"
+        ></p-checkbox>
+        <label for="isPublic">Public</label>
+      </div>
+
+
+      <div class="field">
+        <label for="status">Statut</label>
+        <p-dropdown
+          id="status"
+          formControlName="status"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Choisir un statut"
+        ></p-dropdown>
+      </div>
+
+
+      @if (authService.isAdmin()) {
+
+        <div class="field">
+          <label for="validatedById">Validé par (ID)</label>
+          <input
+            id="validatedById"
+            pInputText
+            type="number"
+            formControlName="validatedById"
+          />
+        </div>
+
+        <div class="field">
+          <label for="validationDate">Date de validation</label>
+          <input
+            id="validationDate"
+            type="date"
+            pInputText
+            formControlName="validationDate"
+          />
+        </div>
+      }
+
+      <button
+        pButton
+        type="submit"
+        label="Sauvegarder"
+        icon="pi pi-check"
+        [disabled]="deckForm.invalid"
+      ></button>
+
+    </form>
+  </div>
+</div>

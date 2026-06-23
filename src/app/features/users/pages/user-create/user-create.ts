@@ -6,10 +6,26 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../../core/services/user.service';
 import { User } from '../../../../core/models/user';
 
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { FloatLabelModule } from 'primeng/floatlabel';
+
 @Component({
   selector: 'app-user-create',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CardModule,
+    InputTextModule,
+    PasswordModule,
+    ButtonModule,
+    MessageModule,
+    FloatLabelModule,
+  ],
   templateUrl: './user-create.html',
   styleUrls: ['./user-create.css'],
 })
@@ -44,13 +60,16 @@ export class UserCreate {
         this.username = '';
         this.password = '';
 
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       },
-      error: (err) => {
+      error: () => {
         this.errorMessage = 'Erreur lors de la création de l’utilisateur';
         this.successMessage = '';
-        console.error(err);
       },
     });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

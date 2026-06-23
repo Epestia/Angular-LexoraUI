@@ -1,6 +1,5 @@
 <h2>Quiz</h2>
 
-<!-- ================= DECK LIST ================= -->
 @if (!quizStarted()) {
 
   <h3>Choisir un deck</h3>
@@ -9,20 +8,26 @@
 
     @for (deck of decks(); track deck.id) {
 
-      <div class="deck-card">
+      <p-card class="deck-card">
 
-        <h4>{{ deck.title | capitalize }}</h4>
+        <ng-template pTemplate="title">
+          {{ deck.title | capitalize }}
+        </ng-template>
 
-        <p>{{ deck.id | deckLabel }}</p>
+        <ng-template pTemplate="content">
+          <p>{{ deck.id | deckLabel }}</p>
+        </ng-template>
 
-        <button
-          pButton
-          label="Lancer le quiz"
-          icon="pi pi-play"
-          (click)="startQuiz(deck.id)">
-        </button>
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            label="Lancer le quiz"
+            icon="pi pi-play"
+            (click)="startQuiz(deck.id)">
+          </button>
+        </ng-template>
 
-      </div>
+      </p-card>
 
     }
 
@@ -30,70 +35,83 @@
 
 }
 
-<!-- ================= QUIZ ================= -->
 @if (quizStarted() && !quizFinished() && currentFlashcard) {
 
-  <div class="quiz-box">
+  <p-card class="quiz-box">
 
-    <h3>{{ currentFlashcard.frontText | capitalize }}</h3>
+    <ng-template pTemplate="title">
+      {{ currentFlashcard.frontText | capitalize }}
+    </ng-template>
 
-    <input
-      pInputText
-      [ngModel]="answer()"
-      (ngModelChange)="answer.set($event)"
-      placeholder="Votre réponse"
-    />
+    <ng-template pTemplate="content">
 
-    <br><br>
+      <input
+        pInputText
+        [ngModel]="answer()"
+        (ngModelChange)="answer.set($event)"
+        placeholder="Votre réponse"
+        class="w-full"
+      />
 
-    <button
-      pButton
-      label="Valider"
-      icon="pi pi-check"
-      (click)="submitAnswer()">
-    </button>
+    </ng-template>
 
-  </div>
+    <ng-template pTemplate="footer">
+
+      <button
+        pButton
+        label="Valider"
+        icon="pi pi-check"
+        (click)="submitAnswer()">
+      </button>
+
+    </ng-template>
+
+  </p-card>
 
 }
 
-<!-- ================= RESULT ================= -->
 @if (quizFinished()) {
 
-  <div class="result">
+  <p-card class="result">
 
-    <h2>Résultat 🎉</h2>
+    <ng-template pTemplate="title">
+      Résultat 🎉
+    </ng-template>
 
-    <p>
-      Score :
-      <strong>
-        {{ score | quizScore:total }}
-      </strong>
-    </p>
+    <ng-template pTemplate="content">
 
-    <p>
-      Réussite :
-      <strong>
-        {{ score | percentageScore:total }}
-      </strong>
-    </p>
+      <p>
+        Score :
+        <strong>{{ score | quizScore:total }}</strong>
+      </p>
 
-    <button
-      pButton
-      label="Enregistrer"
-      icon="pi pi-save"
-      severity="success"
-      (click)="saveQuiz()">
-    </button>
+      <p>
+        Réussite :
+        <strong>{{ score | percentageScore:total }}</strong>
+      </p>
 
-    <button
-      pButton
-      label="Recommencer"
-      icon="pi pi-refresh"
-      class="p-button-secondary"
-      (click)="restart()">
-    </button>
+    </ng-template>
 
-  </div>
+    <ng-template pTemplate="footer">
+
+      <button
+        pButton
+        label="Enregistrer"
+        icon="pi pi-save"
+        severity="success"
+        (click)="saveQuiz()">
+      </button>
+
+      <button
+        pButton
+        label="Recommencer"
+        icon="pi pi-refresh"
+        class="p-button-secondary"
+        (click)="restart()">
+      </button>
+
+    </ng-template>
+
+  </p-card>
 
 }

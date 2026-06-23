@@ -21,7 +21,6 @@ export class AuthService {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
 
-  // 🔥 SIGNALS GLOBAUX
   user = signal<any>(null);
   isLoggedIn = signal(false);
 
@@ -40,7 +39,6 @@ export class AuthService {
         const payload = JSON.parse(atob(res.accessToken.split('.')[1]));
         localStorage.setItem('user', JSON.stringify(payload));
 
-        // 🔥 UPDATE SIGNALS
         this.user.set(payload);
         this.isLoggedIn.set(true);
       }),
@@ -54,7 +52,6 @@ export class AuthService {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
 
-    // 🔥 RESET SIGNALS
     this.user.set(null);
     this.isLoggedIn.set(false);
   }

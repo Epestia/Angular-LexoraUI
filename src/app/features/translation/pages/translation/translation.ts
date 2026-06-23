@@ -1,12 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TranslationService } from '../../../../core/services/translation.service';
 import { Translation } from '../../../../core/models/translation';
 
+import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-translation',
   standalone: true,
+  imports: [CommonModule, CardModule, TableModule, ButtonModule],
   templateUrl: './translation.html',
   styleUrl: './translation.css',
 })
@@ -35,12 +41,8 @@ export class TranslationComponent {
     if (!confirm('Supprimer cette traduction ?')) return;
 
     this.translationService.delete(id).subscribe({
-      next: () => {
-        this.loadTranslations();
-      },
-      error: (err) => {
-        console.error('Erreur delete translation', err);
-      },
+      next: () => this.loadTranslations(),
+      error: (err) => console.error('Erreur delete translation', err),
     });
   }
 }

@@ -8,10 +8,13 @@ import { TranslatedSentenceService } from '../../../../core/services/translated-
 import { Translation } from '../../../../core/models/translation';
 import { TranslatedSentence } from '../../../../core/models/translated-sentence';
 
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-translated-sentence-create',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, InputTextModule, ButtonModule],
   templateUrl: './translated-sentence-create.html',
   styleUrl: './translated-sentence-create.css',
 })
@@ -24,7 +27,7 @@ export class TranslatedSentenceCreate {
   sentence: TranslatedSentence = {
     sentence: '',
     translatedSentence: '',
-    translationId: 0,
+    translationId: null,
   };
 
   constructor() {
@@ -34,7 +37,7 @@ export class TranslatedSentenceCreate {
   loadTranslations(): void {
     this.translationService.getAll().subscribe({
       next: (data) => this.translations.set(data),
-      error: (err) => console.error(err),
+      error: console.error,
     });
   }
 
@@ -46,10 +49,10 @@ export class TranslatedSentenceCreate {
         this.sentence = {
           sentence: '',
           translatedSentence: '',
-          translationId: 0,
+          translationId: null,
         };
       },
-      error: (err) => console.error(err),
+      error: console.error,
     });
   }
 }

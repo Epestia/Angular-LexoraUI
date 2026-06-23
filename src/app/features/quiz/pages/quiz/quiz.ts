@@ -2,8 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 
 import { DeckService } from '../../../../core/services/deck.service';
 import { FlashcardService } from '../../../../core/services/flashcard.service';
@@ -16,7 +14,9 @@ import { QuizScorePipe } from '../../../../shared/pipes/quiz-score.pipe';
 import { CapitalizePipe } from '../../../../shared/pipes/capitalize.pipe';
 import { DeckLabelPipe } from '../../../../shared/pipes/Deck-Label.pipe';
 import { PercentageScorePipe } from '../../../../shared/pipes/percentage-score.pipe';
-
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-quiz',
   standalone: true,
@@ -25,6 +25,7 @@ import { PercentageScorePipe } from '../../../../shared/pipes/percentage-score.p
     FormsModule,
     ButtonModule,
     InputTextModule,
+    CardModule,
     QuizScorePipe,
     CapitalizePipe,
     DeckLabelPipe,
@@ -39,21 +40,19 @@ export class QuizComponent {
   private quizService = inject(QuizService);
   private authService = inject(AuthService);
 
-  // ================= STATE =================
   decks = signal<Deck[]>([]);
   answer = signal('');
 
   quizStarted = signal(false);
   quizFinished = signal(false);
 
-  // ================= INIT =================
+
   ngOnInit(): void {
     this.deckService.getMyDecks().subscribe({
       next: (decks) => this.decks.set(decks),
     });
   }
 
-  // ================= START QUIZ =================
   startQuiz(deckId: number): void {
     this.flashcardService.getByDeck(deckId).subscribe({
       next: (flashcards: Flashcard[]) => {
@@ -69,7 +68,7 @@ export class QuizComponent {
     });
   }
 
-  // ================= ANSWER =================
+
   submitAnswer(): void {
     this.quizService.submitAnswer(this.answer());
 
@@ -80,7 +79,6 @@ export class QuizComponent {
     }
   }
 
-  // ================= SAVE QUIZ =================
   saveQuiz(): void {
     const quiz = {
       id: 0,
@@ -96,7 +94,7 @@ export class QuizComponent {
     });
   }
 
-  // ================= RESTART =================
+
   restart(): void {
     this.quizStarted.set(false);
     this.quizFinished.set(false);
@@ -104,12 +102,12 @@ export class QuizComponent {
     this.quizService.reset();
   }
 
-  // ================= CURRENT FLASHCARD (TYPED SAFE) =================
+
   get currentFlashcard(): Flashcard | null {
     return this.quizService.getCurrentFlashcard();
   }
 
-  // ================= SCORE =================
+
   get score(): number {
     return this.quizService.getScore();
   }

@@ -20,7 +20,7 @@ export class FlashcardsComponent implements OnInit {
   showCreate = false;
 
   newFlashcard: Flashcard = {
-    id: 0, // 👈 important (ou optionnel si backend le génère)
+    id: 0,
     frontText: '',
     backText: '',
     deckId: 1,

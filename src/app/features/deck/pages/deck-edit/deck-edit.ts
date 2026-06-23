@@ -3,12 +3,17 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { DeckService } from '../../../../core/services/deck.service';
-import { Deck, DeckStatus } from '../../../../core/models/deck';
+import { DeckStatus } from '../../../../core/models/deck';
 import { AuthService } from '../../../../core/services/auth.service';
+
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-deck-edit',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputTextModule, CheckboxModule, ButtonModule],
   templateUrl: './deck-edit.html',
 })
 export class DeckEditComponent implements OnInit {
@@ -17,7 +22,14 @@ export class DeckEditComponent implements OnInit {
   private router = inject(Router);
   private deckService = inject(DeckService);
   authService = inject(AuthService);
+
   deckId!: number;
+
+  statusOptions = [
+    { label: 'Private', value: 'PRIVATE' },
+    { label: 'Pending validation', value: 'PENDING_VALIDATION' },
+    { label: 'Approved', value: 'APPROVED' },
+  ];
 
   deckForm = this.fb.group({
     title: ['', Validators.required],
@@ -56,8 +68,8 @@ export class DeckEditComponent implements OnInit {
     const raw = this.deckForm.getRawValue();
 
     const payload = {
-      title: raw.title ?? undefined,
-      language: raw.language ?? undefined,
+      title: raw.title ?? '',
+      language: raw.language ?? '',
       isPublic: raw.isPublic ?? false,
       status: (raw.status ?? 'PRIVATE') as DeckStatus,
       validatedById: raw.validatedById ?? undefined,

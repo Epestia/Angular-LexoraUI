@@ -15,12 +15,15 @@ export class RoleCreateComponent {
   private roleService = inject(RoleService);
   private router = inject(Router);
 
-  roleName: string = '';
+  roleName = '';
 
-  errorMessage: string = '';
-  successMessage: string = '';
+  errorMessage = '';
+  successMessage = '';
 
   createRole() {
+    this.errorMessage = '';
+    this.successMessage = '';
+
     if (!this.roleName.trim()) {
       this.errorMessage = 'Le nom du rôle est obligatoire';
       return;
@@ -28,7 +31,10 @@ export class RoleCreateComponent {
 
     this.roleService.createRole({ name: this.roleName }).subscribe({
       next: () => {
-        this.router.navigate(['/roles']);
+        this.successMessage = 'Rôle créé avec succès';
+        setTimeout(() => {
+          this.router.navigate(['/roles']);
+        }, 500);
       },
       error: () => {
         this.errorMessage = 'Erreur lors de la création du rôle';

@@ -1,50 +1,51 @@
 <div class="container">
 
-  <h2>Créer une traduction</h2>
+  <p-card header="Créer une traduction">
 
-  <!-- Texte traduit -->
-  <div class="mb-3">
-    <label>Texte traduit</label>
-    <input class="form-control"
-           [(ngModel)]="translation.translatedText">
-  </div>
+    <div class="field">
+      <label>Texte traduit</label>
+      <input pInputText
+             [(ngModel)]="translation.translatedText">
+    </div>
 
-  <!-- Langue -->
-  <div class="mb-3">
-    <label>Langue de l'apprenant</label>
-    <input class="form-control"
-           [(ngModel)]="translation.learnerLanguage">
-  </div>
+    <div class="field">
+      <label>Langue de l'apprenant</label>
+      <input pInputText
+             [(ngModel)]="translation.learnerLanguage">
+    </div>
 
-  <!-- Flashcards -->
-  <div class="mb-3">
-    <label>Flashcard</label>
+    <div class="field">
+      <label>Flashcard</label>
 
-    @if (flashcards$ | async; as flashcards) {
+      @if (flashcards$ | async; as flashcards) {
 
-      <select class="form-select"
-              [(ngModel)]="translation.flashcardId">
+        <select class="form-control"
+                [(ngModel)]="translation.flashcardId">
 
-        <option [ngValue]="null">
-          -- Sélectionner une flashcard --
-        </option>
-
-        @for (f of flashcards; track f.id) {
-          <option [ngValue]="f.id">
-            {{ f.frontText }}
+          <option [ngValue]="null">
+            -- Sélectionner une flashcard --
           </option>
-        }
 
-      </select>
+          @for (f of flashcards; track f.id) {
+            <option [ngValue]="f.id">
+              {{ f.frontText }}
+            </option>
+          }
 
-    } @else {
-      <p>Chargement...</p>
-    }
+        </select>
 
-  </div>
+      } @else {
+        <p>Chargement...</p>
+      }
 
-  <button class="btn btn-primary" (click)="save()">
-    Enregistrer
-  </button>
+    </div>
+
+    <p-button
+      label="Enregistrer"
+      icon="pi pi-save"
+      (click)="save()">
+    </p-button>
+
+  </p-card>
 
 </div>

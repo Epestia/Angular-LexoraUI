@@ -1,5 +1,3 @@
-
-
 export interface Translation {
   id?: number;
   translatedText: string;

@@ -1,39 +1,79 @@
-<div class="container">
+<div class="user-container">
 
-  <h2>Créer un utilisateur</h2>
+  <p-card class="user-card">
 
-  @if (successMessage) {
-    <div class="success">
-      {{ successMessage }}
+    <div class="text-center mb-4">
+      <i class="pi pi-user-plus text-5xl text-primary"></i>
+      <h2 class="mt-3 mb-1">Créer un utilisateur</h2>
+      <p class="text-color-secondary">
+        Inscription rapide
+      </p>
     </div>
-  }
 
-  @if (errorMessage) {
-    <div class="error">
-      {{ errorMessage }}
+    @if (successMessage) {
+      <p-message severity="success" class="w-full mb-3">
+        {{ successMessage }}
+      </p-message>
+    }
+
+    @if (errorMessage) {
+      <p-message severity="error" class="w-full mb-3">
+        {{ errorMessage }}
+      </p-message>
+    }
+
+    <div class="form">
+
+      <p-floatlabel class="w-full">
+        <input
+          pInputText
+          id="username"
+          [(ngModel)]="username"
+          class="w-full" />
+
+        <label for="username">Username</label>
+      </p-floatlabel>
+
+      <p-floatlabel class="w-full password-field">
+        <p-password
+          inputId="password"
+          [(ngModel)]="password"
+          [feedback]="false"
+          [toggleMask]="true"
+          inputStyleClass="w-full">
+        </p-password>
+
+        <label for="password">Password</label>
+      </p-floatlabel>
+
+      <div class="actions">
+
+        <button
+          pButton
+          type="button"
+          class="w-full"
+          (click)="createUser()">
+
+          <i class="pi pi-user-plus"></i>
+          <span class="ml-2">Créer utilisateur</span>
+
+        </button>
+
+        <button
+          pButton
+          type="button"
+          class="w-full p-button-secondary"
+          (click)="goToLogin()">
+
+          <i class="pi pi-sign-in"></i>
+          <span class="ml-2">Déjà inscrit ? Se connecter</span>
+
+        </button>
+
+      </div>
+
     </div>
-  }
 
-  <div class="form">
-
-    <input
-      type="text"
-      placeholder="Username"
-      [(ngModel)]="username"
-      name="username"
-    >
-
-    <input
-      type="password"
-      placeholder="Password"
-      [(ngModel)]="password"
-      name="password"
-    >
-
-    <button (click)="createUser()">
-      Créer utilisateur
-    </button>
-
-  </div>
+  </p-card>
 
 </div>

@@ -12,10 +12,15 @@ import { Deck } from '../../../../core/models/deck';
 import { Flashcard } from '../../../../core/models/flashcard';
 import { UserFlashcardProgress } from '../../../../core/models/UserFlashcardProgress';
 
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { TagModule } from 'primeng/tag';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 @Component({
   selector: 'app-study-session-create',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ButtonModule],
   templateUrl: './study-session-create.html',
   styleUrls: ['./study-session-create.css'],
 })
@@ -41,7 +46,7 @@ export class StudySessionCreateComponent implements OnInit {
   loadDecks() {
     this.deckService.getMyDecks().subscribe({
       next: (data) => this.decks.set(data),
-      error: (err) => console.error(err),
+      error: console.error,
     });
   }
 
@@ -57,19 +62,12 @@ export class StudySessionCreateComponent implements OnInit {
         this.flashcards.set(data ?? []);
         this.selectedFlashcardId = null;
       },
-      error: (err) => console.error(err),
+      error: console.error,
     });
   }
 
   createStudySession() {
-    console.log('CLICK OK');
-    console.log('deck:', this.selectedDeckId);
-    console.log('flashcard:', this.selectedFlashcardId);
-
-    if (!this.selectedDeckId || !this.selectedFlashcardId) {
-      console.warn('Missing selection');
-      return;
-    }
+    if (!this.selectedDeckId || !this.selectedFlashcardId) return;
 
     const progress: UserFlashcardProgress = {
       userId: this.userId,
@@ -81,11 +79,8 @@ export class StudySessionCreateComponent implements OnInit {
     };
 
     this.progressService.create(progress).subscribe({
-      next: () => {
-        console.log('created');
-        this.router.navigate(['/study-session']);
-      },
-      error: (err: unknown) => console.error(err),
+      next: () => this.router.navigate(['/study-session']),
+      error: console.error,
     });
   }
 }

@@ -51,7 +51,6 @@ export class QuizAllComponent implements OnInit {
     });
   }
 
-  // ================= CHART =================
   buildChart(quizzes: Quiz[]): void {
     const labels = quizzes.map((q) => new Date(q.attemptDate).toLocaleDateString());
 

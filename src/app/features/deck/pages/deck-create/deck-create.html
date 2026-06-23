@@ -1,19 +1,62 @@
-<form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
+<div class="page">
+  <div class="card">
+    <h2>Créer un deck</h2>
 
-  <input formControlName="title" placeholder="Titre">
-  <input formControlName="language" placeholder="Langue">
+    <form [formGroup]="deckForm" (ngSubmit)="onSubmit()" class="p-fluid">
 
-  <label>
-    Public
-    <input type="checkbox" formControlName="isPublic">
-  </label>
 
-  <select formControlName="status">
-    <option value="PRIVATE">PRIVATE</option>
-    <option value="PUBLIC">PUBLIC</option>
-    <option value="DRAFT">DRAFT</option>
-  </select>
+      <div class="field">
+        <label for="title">Titres</label>
+        <input
+          id="title"
+          pInputText
+          formControlName="title"
+          placeholder="Titre du deck"
+        />
+      </div>
 
-  <button type="submit">Créer</button>
 
-</form>
+      <div class="field">
+        <label for="language">Langue</label>
+        <input
+          id="language"
+          pInputText
+          formControlName="language"
+          placeholder="Ex: FR, EN..."
+        />
+      </div>
+
+
+      <div class="field">
+        <label for="status">Statut</label>
+        <p-dropdown
+          id="status"
+          formControlName="status"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Choisir un statut"
+        ></p-dropdown>
+      </div>
+
+
+      <div class="field-checkbox">
+        <p-checkbox
+          formControlName="isPublic"
+          [binary]="true"
+          inputId="isPublic"
+        ></p-checkbox>
+
+        <label for="isPublic">Deck public</label>
+      </div>
+
+      <button
+        pButton
+        type="submit"
+        label="Créer"
+        icon="pi pi-check"
+        [disabled]="deckForm.invalid"
+      ></button>
+
+    </form>
+  </div>
+</div>

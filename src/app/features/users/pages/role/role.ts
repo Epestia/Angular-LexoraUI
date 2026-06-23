@@ -21,7 +21,10 @@ export class RoleComponent {
   deleteRole(id: number) {
     this.roleService.deleteRole(id).subscribe({
       next: () => {
-        window.location.reload();
+        // mieux que reload
+        this.roles = toSignal(this.roleService.getAllRoles(), {
+          initialValue: [],
+        });
       },
       error: () => {
         console.error('Erreur suppression rôle');

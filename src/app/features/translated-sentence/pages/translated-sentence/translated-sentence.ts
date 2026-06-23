@@ -5,10 +5,13 @@ import { Router } from '@angular/router';
 import { TranslatedSentence } from '../../../../core/models/translated-sentence';
 import { TranslatedSentenceService } from '../../../../core/services/translated-sentence.service';
 
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+
 @Component({
   selector: 'app-translated-sentence',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonModule, TableModule],
   templateUrl: './translated-sentence.html',
   styleUrl: './translated-sentence.css',
 })
@@ -24,12 +27,8 @@ export class TranslatedSentenceComponent implements OnInit {
 
   loadSentences(): void {
     this.translatedSentenceService.getMySentences().subscribe({
-      next: (data) => {
-        this.sentences.set(data);
-      },
-      error: (err) => {
-        console.error('Erreur chargement phrases', err);
-      },
+      next: (data) => this.sentences.set(data),
+      error: (err) => console.error(err),
     });
   }
 
@@ -38,17 +37,13 @@ export class TranslatedSentenceComponent implements OnInit {
   }
 
   deleteSentence(id: number): void {
-    if (!confirm('Supprimer cette phrase ?')) {
-      return;
-    }
+    if (!confirm('Supprimer cette phrase ?')) return;
 
     this.translatedSentenceService.delete(id).subscribe({
       next: () => {
-        this.sentences.update((sentences) => sentences.filter((s) => s.id !== id));
+        this.sentences.update((list) => list.filter((s) => s.id !== id));
       },
-      error: (err) => {
-        console.error('Erreur suppression', err);
-      },
+      error: console.error,
     });
   }
 }

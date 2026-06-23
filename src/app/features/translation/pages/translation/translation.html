@@ -1,47 +1,51 @@
 <div class="container">
 
-  <h2>Translations</h2>
+  <p-card header="Translations">
 
-  <button class="btn btn-primary mb-3"
-          (click)="goToCreate()">
-    Créer une traduction
-  </button>
+    <div class="mb-3">
+      <p-button
+        label="Créer une traduction"
+        icon="pi pi-plus"
+        (click)="goToCreate()">
+      </p-button>
+    </div>
 
-  @if (translations().length === 0) {
-    <p>Aucune traduction trouvée</p>
-  } @else {
+    @if (translations().length === 0) {
+      <p>Aucune traduction trouvée</p>
+    } @else {
 
-    <table class="table table-striped">
+      <p-table [value]="translations()" [tableStyle]="{ 'min-width': '60rem' }">
 
-      <thead>
-      <tr>
-        <th>Texte traduit</th>
-        <th>Langue</th>
-        <th>Flashcard</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Texte traduit</th>
+            <th>Langue</th>
+            <th>Flashcard</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
 
-      <tbody>
-        @for (t of translations(); track t.id) {
+        <ng-template pTemplate="body" let-t>
           <tr>
             <td>{{ t.translatedText }}</td>
             <td>{{ t.learnerLanguage }}</td>
             <td>{{ t.flashcardId }}</td>
 
             <td>
-              <button class="btn btn-danger btn-sm"
-                      (click)="deleteTranslation(t.id!)">
-                Supprimer
-              </button>
+              <p-button
+                icon="pi pi-trash"
+                severity="danger"
+                size="small"
+                (click)="deleteTranslation(t.id!)">
+              </p-button>
             </td>
-
           </tr>
-        }
-      </tbody>
+        </ng-template>
 
-    </table>
+      </p-table>
 
-  }
+    }
+
+  </p-card>
 
 </div>

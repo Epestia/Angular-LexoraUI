@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -15,43 +15,32 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css'],
 })
-export class Navbar implements OnInit {
+export class Navbar {
   private authService = inject(AuthService);
   private router = inject(Router);
 
   user = this.authService.user;
-  isLoggedIn = this.authService.isLoggedIn;
-
   items: MenuItem[] = [];
 
-  ngOnInit() {
+  constructor() {
     this.authService.initAuthFromStorage();
+
     this.buildMenu();
+
+    effect(() => {
+      this.user();
+      this.buildMenu();
+    });
   }
 
   buildMenu() {
+    const user = this.user();
+
     this.items = [
       {
         label: 'Accueil',
         icon: 'pi pi-home',
         routerLink: '/',
-      },
-
-      {
-        label: 'Decks',
-        icon: 'pi pi-book',
-        items: [
-          {
-            label: 'Liste des decks',
-            icon: 'pi pi-list',
-            routerLink: '/decks',
-          },
-          {
-            label: 'Créer un deck',
-            icon: 'pi pi-plus',
-            routerLink: '/decks/create',
-          },
-        ],
       },
 
       {
@@ -71,7 +60,24 @@ export class Navbar implements OnInit {
         ],
       },
 
-      ...(this.user()
+      {
+        label: 'Decks',
+        icon: 'pi pi-book',
+        items: [
+          {
+            label: 'Liste des decks',
+            icon: 'pi pi-list',
+            routerLink: '/decks',
+          },
+          {
+            label: 'Créer un deck',
+            icon: 'pi pi-plus',
+            routerLink: '/decks/create',
+          },
+        ],
+      },
+
+      ...(user
         ? [
             {
               label: 'Quiz',
@@ -83,39 +89,41 @@ export class Navbar implements OnInit {
                   routerLink: '/quiz',
                 },
                 {
-                  label: 'Mes résultats',
+                  label: 'Résultats',
                   icon: 'pi pi-chart-bar',
                   routerLink: '/quiz/all',
                 },
               ],
             },
+
             {
-              label: 'Traductions',
+              label: 'Langue',
               icon: 'pi pi-language',
               items: [
                 {
-                  label: 'Liste des traductions',
+                  label: 'Traductions',
                   icon: 'pi pi-list',
                   routerLink: '/translations',
                 },
                 {
-                  label: 'Créer une traduction',
+                  label: 'Créer traduction',
                   icon: 'pi pi-plus',
                   routerLink: '/translations/create',
                 },
               ],
             },
+
             {
-              label: 'Phrases traduites',
+              label: 'Phrases',
               icon: 'pi pi-comment',
               items: [
                 {
-                  label: 'Liste des phrases',
+                  label: 'Liste',
                   icon: 'pi pi-list',
                   routerLink: '/translated-sentences',
                 },
                 {
-                  label: 'Créer une phrase',
+                  label: 'Créer',
                   icon: 'pi pi-plus',
                   routerLink: '/translated-sentences/create',
                 },
@@ -124,21 +132,20 @@ export class Navbar implements OnInit {
           ]
         : []),
 
-      // ===================== ADMIN =====================
-      ...(this.user() && (this.user()?.role === 'ADMIN' || this.user()?.role === 'SUPER_ADMIN')
+      ...(user && (user.role === 'ADMIN' || user.role === 'SUPER_ADMIN')
         ? [
             {
-              label: 'Gestion utilisateurs',
-              icon: 'pi pi-users',
+              label: 'Administration',
+              icon: 'pi pi-shield',
               items: [
                 {
-                  label: 'User List',
-                  icon: 'pi pi-list',
+                  label: 'Users',
+                  icon: 'pi pi-users',
                   routerLink: '/users',
                 },
                 {
-                  label: 'Gestion rôles',
-                  icon: 'pi pi-shield',
+                  label: 'Rôles',
+                  icon: 'pi pi-key',
                   routerLink: '/roles',
                 },
               ],
@@ -152,12 +159,12 @@ export class Navbar implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  goToRegister() {
+    this.router.navigate(['/users/create']);
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
-  }
-
-  goToRegister() {
-    this.router.navigate(['/users/create']);
   }
 }

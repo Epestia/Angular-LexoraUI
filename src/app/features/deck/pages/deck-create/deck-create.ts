@@ -5,21 +5,26 @@ import { Router } from '@angular/router';
 import { DeckService } from '../../../../core/services/deck.service';
 import { DeckStatus } from '../../../../core/models/deck';
 
-// ✅ PrimeNG imports
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
-
 @Component({
   selector: 'app-deck-create',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, CheckboxModule,  ButtonModule],
+  imports: [ReactiveFormsModule, InputTextModule, CheckboxModule, ButtonModule],
   templateUrl: './deck-create.html',
+  styleUrl: './deck-create.css',
 })
 export class DeckCreateComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private deckService = inject(DeckService);
+
+  statusOptions = [
+    { label: 'Private', value: 'PRIVATE' },
+    { label: 'Public', value: 'PUBLIC' },
+    { label: 'Draft', value: 'DRAFT' },
+  ];
 
   deckForm = this.fb.group({
     title: ['', Validators.required],
@@ -33,16 +38,16 @@ export class DeckCreateComponent {
 
     const raw = this.deckForm.getRawValue();
 
-    const payload = {
-      title: raw.title ?? undefined,
-      language: raw.language ?? undefined,
-      isPublic: raw.isPublic ?? false,
-      status: (raw.status ?? 'PRIVATE') as DeckStatus,
-    };
-
-    this.deckService.createDeck(payload).subscribe({
-      next: () => this.router.navigate(['/decks']),
-      error: console.error,
-    });
+    this.deckService
+      .createDeck({
+        title: raw.title ?? '',
+        language: raw.language ?? '',
+        isPublic: raw.isPublic ?? false,
+        status: (raw.status ?? 'PRIVATE') as DeckStatus,
+      })
+      .subscribe({
+        next: () => this.router.navigate(['/decks']),
+        error: (err) => console.error(err),
+      });
   }
 }

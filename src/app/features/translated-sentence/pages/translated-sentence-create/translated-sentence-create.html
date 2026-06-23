@@ -1,33 +1,41 @@
-<div class="container">
+<div class="page">
 
-  <h2>Créer une phrase traduite</h2>
+  <div class="card">
 
-  <!-- sentence -->
-  <div class="mb-3">
-    <label>Phrase originale</label>
-    <input class="form-control"
-           [(ngModel)]="sentence.sentence">
-  </div>
+    <h2>Créer une phrase traduite</h2>
 
-  <!-- translated sentence -->
-  <div class="mb-3">
-    <label>Traduction</label>
-    <input class="form-control"
-           [(ngModel)]="sentence.translatedSentence">
-  </div>
+    <!-- phrase originale -->
+    <div class="field">
+      <label>Phrase originale</label>
+      <input
+        pInputText
+        name="sentence"
+        [(ngModel)]="sentence.sentence"
+        placeholder="Entrer la phrase"
+      />
+    </div>
 
-  <!-- translation select -->
-  <div class="mb-3">
-    <label>Translation</label>
+    <!-- traduction -->
+    <div class="field">
+      <label>Traduction</label>
+      <input
+        pInputText
+        name="translatedSentence"
+        [(ngModel)]="sentence.translatedSentence"
+        placeholder="Traduction"
+      />
+    </div>
 
-    @if (translations().length === 0) {
-      <p>Chargement...</p>
-    } @else {
+    <!-- SELECT SIMPLE (remplace dropdown) -->
+    <div class="field">
+      <label>Translation</label>
 
-      <select class="form-select"
-              [(ngModel)]="sentence.translationId">
+      <select
+        class="form-control"
+        name="translationId"
+        [(ngModel)]="sentence.translationId">
 
-        <option [ngValue]="0">
+        <option [ngValue]="null">
           -- choisir une traduction --
         </option>
 
@@ -39,12 +47,17 @@
 
       </select>
 
-    }
-  </div>
+    </div>
 
-  <button class="btn btn-primary"
-          (click)="save()">
-    Créer
-  </button>
+    <!-- button -->
+    <button
+      pButton
+      label="Créer"
+      icon="pi pi-check"
+      (click)="save()"
+      [disabled]="!sentence.sentence || !sentence.translatedSentence || !sentence.translationId">
+    </button>
+
+  </div>
 
 </div>

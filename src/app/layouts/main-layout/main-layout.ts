@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Navbar } from './navbar/navbar'; // 👈 adapte le chemin
-
+import { Navbar } from './navbar/navbar';
+import { FooterComponent } from './footer/footer';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, Navbar], // ✅ IMPORTANT
+  imports: [RouterOutlet, Navbar],
   templateUrl: './main-layout.html',
 })
 export class MainLayoutComponent {}

@@ -1,23 +1,51 @@
 .logo {
   font-size: 1.4rem;
-  font-weight: bold;
+  font-weight: 700;
   text-decoration: none;
-  color: var(--p-text-color);
+  color: white;
 }
 
 .user {
   margin-right: 1rem;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
 }
 
+/* NAVBAR */
 :host ::ng-deep .p-menubar {
   border: none;
   border-radius: 0;
-  background: var(--p-surface-0);
+
+  background: linear-gradient(
+    135deg,
+    #38bdf8,
+    #60a5fa,
+    #3b82f6
+  );
+
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
+
+
+:host ::ng-deep .p-menubar .p-menuitem-text,
+:host ::ng-deep .p-menubar .p-menuitem-icon {
+  color: white !important;
+}
+
 
 :host ::ng-deep .p-menubar-end {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+
+:host ::ng-deep .p-button {
+  border-radius: 8px;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
 }

@@ -47,9 +47,7 @@ export class DeckComponent implements OnInit {
     this.loadMyDecks();
   }
 
-  // ----------------------------
-  // LOAD DECKS
-  // ----------------------------
+
   loadMyDecks(): void {
     this.loading.set(true);
 
@@ -66,9 +64,7 @@ export class DeckComponent implements OnInit {
     });
   }
 
-  // ----------------------------
-  // LOAD FLASHCARDS
-  // ----------------------------
+
   loadFlashcards(decks: Deck[]): void {
     const map: Record<number, Flashcard[]> = {};
 
@@ -85,17 +81,12 @@ export class DeckComponent implements OnInit {
     });
   }
 
-  // ----------------------------
-  // GET FLASHCARDS BY DECK
-  // ----------------------------
+
   getFlashcards(deckId?: number): Flashcard[] {
     if (!deckId) return [];
     return this.flashcardsByDeck()[deckId] ?? [];
   }
 
-  // ----------------------------
-  // DELETE DECK
-  // ----------------------------
   deleteDeck(id: number): void {
     if (!confirm('Supprimer ce deck ?')) return;
 
@@ -113,9 +104,7 @@ export class DeckComponent implements OnInit {
     });
   }
 
-  // ----------------------------
-  // TRANSLATION CREATE ACTION
-  // ----------------------------
+
   openCreateTranslation(flashcardId: number): void {
     this.router.navigate(
       ['/flashcards', flashcardId, 'translations'],
@@ -125,9 +114,7 @@ export class DeckComponent implements OnInit {
     );
   }
 
-  // ----------------------------
-  // STATUS UI
-  // ----------------------------
+
   getStatusSeverity(status: string): 'success' | 'warn' | 'danger' | 'info' {
     switch (status) {
       case 'ACTIVE':

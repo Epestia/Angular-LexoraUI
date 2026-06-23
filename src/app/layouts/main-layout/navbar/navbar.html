@@ -10,20 +10,18 @@
 
     @if (!user()) {
 
-      <button
-        pButton
+      <p-button
         label="Créer un compte"
         icon="pi pi-user-plus"
-        class="p-button-secondary"
-        (click)="goToRegister()">
-      </button>
+        severity="secondary"
+        (onClick)="goToRegister()">
+      </p-button>
 
-      <button
-        pButton
+      <p-button
         label="Connexion"
         icon="pi pi-sign-in"
-        (click)="goToLogin()">
-      </button>
+        (onClick)="goToLogin()">
+      </p-button>
 
     }
 
@@ -33,13 +31,13 @@
         {{ user()?.sub }}
       </span>
 
-      <button
-        pButton
+      <p-button
+        label="Déconnexion"
         icon="pi pi-sign-out"
         severity="danger"
-        label="Déconnexion"
-        (click)="logout()">
-      </button>
+        (onClick)="logout()">
+      </p-button>
+
     }
 
   </ng-template>

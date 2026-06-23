@@ -11,14 +11,11 @@ import { API_ENDPOINTS } from '../api/api-endpoints';
 })
 export class QuizService {
   constructor(private http: HttpClient) {}
-
-  // ================= STATE =================
   private flashcards = signal<Flashcard[]>([]);
   private currentIndex = signal(0);
   private score = signal(0);
   private deckId = signal<number | null>(null);
 
-  // ================= START =================
   start(flashcards: Flashcard[], deckId: number): void {
     const shuffled = [...flashcards].sort(() => Math.random() - 0.5);
 
@@ -28,7 +25,6 @@ export class QuizService {
     this.score.set(0);
   }
 
-  // ================= CURRENT =================
   getCurrentFlashcard(): Flashcard | null {
     const cards = this.flashcards();
     const index = this.currentIndex();
@@ -36,7 +32,6 @@ export class QuizService {
     return cards[index] ?? null;
   }
 
-  // ================= ANSWER =================
   submitAnswer(answer: string): void {
     const card = this.getCurrentFlashcard();
     if (!card) return;
@@ -50,7 +45,6 @@ export class QuizService {
     this.currentIndex.update((v) => v + 1);
   }
 
-  // ================= STATUS =================
   isFinished(): boolean {
     return this.currentIndex() >= this.flashcards().length;
   }
@@ -67,7 +61,6 @@ export class QuizService {
     return this.deckId() ?? 0;
   }
 
-  // ================= RESET =================
   reset(): void {
     this.flashcards.set([]);
     this.currentIndex.set(0);
@@ -75,7 +68,6 @@ export class QuizService {
     this.deckId.set(null);
   }
 
-  // ================= NORMALIZE =================
   private normalize(value: string): string {
     return value
       .trim()
@@ -84,7 +76,6 @@ export class QuizService {
       .replace(/[\u0300-\u036f]/g, '');
   }
 
-  // ================= SAVE QUIZ =================
   saveQuiz(quiz: Quiz): Observable<Quiz> {
     return this.http.post<Quiz>(API_ENDPOINTS.quiz, quiz);
   }

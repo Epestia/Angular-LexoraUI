@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StudySessionEdit } from './study-session-edit';
+import { StudySessionEditComponent } from './study-session-edit';
 
 describe('StudySessionEdit', () => {
-  let component: StudySessionEdit;
-  let fixture: ComponentFixture<StudySessionEdit>;
+  let component: StudySessionEditComponent;
+  let fixture: ComponentFixture<StudySessionEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StudySessionEdit],
+      imports: [StudySessionEditComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(StudySessionEdit);
+    fixture = TestBed.createComponent(StudySessionEditComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

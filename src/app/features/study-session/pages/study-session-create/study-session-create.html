@@ -1,44 +1,51 @@
-<h2>Create Study Session</h2>
+<div class="page">
+  <div class="card">
+    <h2>Create Study Session</h2>
 
-<!-- DECK -->
-<label>Deck</label>
-<select
-  [(ngModel)]="selectedDeckId"
-  (ngModelChange)="onDeckChange()"
->
+    <label>Deck</label>
+    <select
+      [(ngModel)]="selectedDeckId"
+      (change)="onDeckChange()"
+      class="select"
+    >
+      <option [ngValue]="null">Select deck</option>
 
-  <option [ngValue]="null">Select deck</option>
+      @for (deck of decks(); track deck.id) {
+        <option [ngValue]="deck.id">
+          {{ deck.title }}
+        </option>
+      }
+    </select>
 
-  @for (deck of decks(); track deck.id) {
-    <option [value]="deck.id">
-      {{ deck.title }}
-    </option>
-  }
-</select>
 
-<!-- FLASHCARDS -->
-<label>Flashcard</label>
-<select
-  [(ngModel)]="selectedFlashcardId"
->
+    <label>Flashcard</label>
+    <select
+      [(ngModel)]="selectedFlashcardId"
+      class="select"
+    >
+      <option [ngValue]="null">Select flashcard</option>
 
-  <option [ngValue]="null">Select flashcard</option>
+      @for (card of flashcards(); track card.id) {
+        <option [ngValue]="card.id">
+          {{ card.frontText }}
+        </option>
+      }
+    </select>
 
-  @for (card of flashcards(); track $index) {
-    <option [value]="card.id">
-      {{ card.frontText }}
-    </option>
-  }
-</select>
 
-<!-- DEBUG -->
-<p>Deck: {{ selectedDeckId }}</p>
-<p>Flashcard: {{ selectedFlashcardId }}</p>
+    <div class="debug">
+      <p>Deck: {{ selectedDeckId }}</p>
+      <p>Flashcard: {{ selectedFlashcardId }}</p>
+    </div>
 
-<!-- ACTION -->
-<button
-  (click)="createStudySession()"
-  [disabled]="!selectedDeckId || !selectedFlashcardId"
->
-  Start Study Session
-</button>
+    <button
+      pButton
+      type="button"
+      label="Start Study Session"
+      icon="pi pi-play"
+      (click)="createStudySession()"
+      [disabled]="!selectedDeckId || !selectedFlashcardId"
+    ></button>
+
+  </div>
+</div>

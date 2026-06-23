@@ -1,19 +1,33 @@
-select {
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 12px;
+  background: var(--surface-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+label {
   display: block;
-  margin-bottom: 10px;
-  padding: 6px;
-  min-width: 250px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
-button {
-  padding: 8px 12px;
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  cursor: pointer;
+.select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 1rem;
 }
 
-button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
+.debug {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
 }

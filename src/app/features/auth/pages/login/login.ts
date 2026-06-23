@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -22,8 +22,10 @@ import { Router } from '@angular/router';
     ButtonModule,
     MessageModule,
     CardModule,
+    FloatLabelModule,
   ],
   templateUrl: './login.html',
+  styleUrls: ['./login.css'],
 })
 export class Login {
   username = '';

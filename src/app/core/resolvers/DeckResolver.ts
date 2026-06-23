@@ -12,6 +12,7 @@ export class DeckResolver implements Resolve<Deck> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<Deck> {
     const deckId = route.paramMap.get('id');
+    console.log(deckId);
     return this.deckService.getDeckById(Number(deckId));
   }
 }

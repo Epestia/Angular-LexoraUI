@@ -20,7 +20,6 @@
         <span>{{ getFlashcards(deck.id).length }} flashcards</span>
       </div>
 
-      <!-- FLASHCARDS -->
       <div class="flashcards">
 
         @for (flashcard of getFlashcards(deck.id); track flashcard.id ?? $index) {
@@ -46,7 +45,6 @@
 
       </div>
 
-      <!-- ACTIONS DECK -->
       <div class="actions">
 
         <p-button
