@@ -1,0 +1,61 @@
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-card {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.deck-badge {
+  background: #e3f2fd;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.score.good {
+  color: green;
+  font-weight: bold;
+}
+
+.score.bad {
+  color: red;
+  font-weight: bold;
+}
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 0;
+}
+
+.chart-container {
+  margin-bottom: 20px;
+}

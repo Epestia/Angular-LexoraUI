@@ -1,0 +1,45 @@
+<p-menubar [model]="items">
+
+  <ng-template pTemplate="start">
+    <a class="logo" routerLink="/">
+      Lexora
+    </a>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+
+    @if (!user()) {
+
+      <p-button
+        label="Créer un compte"
+        icon="pi pi-user-plus"
+        severity="secondary"
+        (onClick)="goToRegister()">
+      </p-button>
+
+      <p-button
+        label="Connexion"
+        icon="pi pi-sign-in"
+        (onClick)="goToLogin()">
+      </p-button>
+
+    }
+
+    @if (user()) {
+
+      <span class="user">
+        {{ user()?.sub }}
+      </span>
+
+      <p-button
+        label="Déconnexion"
+        icon="pi pi-sign-out"
+        severity="danger"
+        (onClick)="logout()">
+      </p-button>
+
+    }
+
+  </ng-template>
+
+</p-menubar>

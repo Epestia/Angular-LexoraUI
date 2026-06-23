@@ -1,0 +1,43 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem;
+
+  background: linear-gradient(
+    135deg,
+    rgb(252 251 251 / 0) 50%,
+    #ffffff 100%
+  );
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+}
+
+:host ::ng-deep .login-card .p-card {
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 15%);
+}
+
+:host ::ng-deep .login-card .p-card-body {
+  padding: 2rem;
+}
+
+:host ::ng-deep .p-password,
+:host ::ng-deep .p-password-input {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+.password-field {
+  margin-top: 8%;
+}
+.login-btn {
+  margin-top: 8%;
+}

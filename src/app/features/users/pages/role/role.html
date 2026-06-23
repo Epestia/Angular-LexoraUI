@@ -1,0 +1,39 @@
+<div class="page">
+  <h2>Liste des rôles</h2>
+
+  <button routerLink="/roles/create" class="btn-create">
+    + Créer un rôle
+  </button>
+
+  @if (roles().length > 0) {
+    <table class="role-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        @for (role of roles(); track role.id) {
+          <tr>
+            <td>{{ role.id }}</td>
+            <td>{{ role.name }}</td>
+
+            <td>
+              <button
+                class="btn-delete"
+                (click)="deleteRole(role.id)"
+              >
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <p>Aucun rôle trouvé.</p>
+  }
+</div>

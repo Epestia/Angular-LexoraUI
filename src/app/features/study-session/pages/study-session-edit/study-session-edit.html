@@ -1,0 +1,49 @@
+<div class="container">
+
+  <p-card header="Modifier la session d'étude">
+
+    @if (!session()) {
+      <p>Chargement...</p>
+    } @else {
+
+      <div class="field">
+        <label>Répétition</label>
+        <p-inputNumber
+          [(ngModel)]="session()!.repetitionLevel">
+        </p-inputNumber>
+      </div>
+
+      <div class="field">
+        <label>Révisions</label>
+        <p-inputNumber
+          [(ngModel)]="session()!.timesReviewed">
+        </p-inputNumber>
+      </div>
+
+      <div class="field">
+        <label>Connue</label>
+        <select class="form-control"
+                [(ngModel)]="session()!.known">
+          <option [ngValue]="true">Oui</option>
+          <option [ngValue]="false">Non</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Prochaine révision</label>
+        <input type="date"
+               class="form-control"
+               [(ngModel)]="session()!.nextReviewDate">
+      </div>
+
+      <p-button
+        label="Sauvegarder"
+        icon="pi pi-check"
+        (click)="save()">
+      </p-button>
+
+    }
+
+  </p-card>
+
+</div>

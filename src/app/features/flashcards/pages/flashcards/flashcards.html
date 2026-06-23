@@ -1,0 +1,48 @@
+<h2>Flashcards</h2>
+
+<button (click)="showCreate = !showCreate">
+  + Ajouter une flashcard
+</button>
+
+@if (showCreate) {
+
+  <div class="create-form">
+
+    <input
+      type="text"
+      placeholder="Front text"
+      [(ngModel)]="newFlashcard.frontText"
+    />
+
+    <input
+      type="text"
+      placeholder="Back text"
+      [(ngModel)]="newFlashcard.backText"
+    />
+
+    <button (click)="createFlashcard()">
+      Créer
+    </button>
+
+  </div>
+
+}
+
+@if (loading) {
+  <p>Chargement...</p>
+}
+
+@if (errorMessage) {
+  <p>{{ errorMessage }}</p>
+}
+
+@for (flashcard of flashcards; track flashcard.id) {
+  <div class="flashcard">
+    <h3>{{ flashcard.frontText }}</h3>
+    <p>{{ flashcard.backText }}</p>
+
+    <button (click)="deleteFlashcard(flashcard.id!)">
+      Supprimer
+    </button>
+  </div>
+}

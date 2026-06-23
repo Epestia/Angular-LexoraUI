@@ -1,0 +1,33 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 12px;
+  background: var(--surface-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 1rem;
+}
+
+.debug {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}

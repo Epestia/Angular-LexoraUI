@@ -1,0 +1,51 @@
+.page {
+  padding: 2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.btn-create {
+  margin-bottom: 1rem;
+  padding: 8px 12px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.role-table th,
+.role-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.role-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.btn-delete {
+  padding: 6px 10px;
+  background: #e53935;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-delete:hover {
+  background: #c62828;
+}

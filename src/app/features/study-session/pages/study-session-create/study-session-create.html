@@ -1,0 +1,51 @@
+<div class="page">
+  <div class="card">
+    <h2>Create Study Session</h2>
+
+    <label>Deck</label>
+    <select
+      [(ngModel)]="selectedDeckId"
+      (change)="onDeckChange()"
+      class="select"
+    >
+      <option [ngValue]="null">Select deck</option>
+
+      @for (deck of decks(); track deck.id) {
+        <option [ngValue]="deck.id">
+          {{ deck.title }}
+        </option>
+      }
+    </select>
+
+
+    <label>Flashcard</label>
+    <select
+      [(ngModel)]="selectedFlashcardId"
+      class="select"
+    >
+      <option [ngValue]="null">Select flashcard</option>
+
+      @for (card of flashcards(); track card.id) {
+        <option [ngValue]="card.id">
+          {{ card.frontText }}
+        </option>
+      }
+    </select>
+
+
+    <div class="debug">
+      <p>Deck: {{ selectedDeckId }}</p>
+      <p>Flashcard: {{ selectedFlashcardId }}</p>
+    </div>
+
+    <button
+      pButton
+      type="button"
+      label="Start Study Session"
+      icon="pi pi-play"
+      (click)="createStudySession()"
+      [disabled]="!selectedDeckId || !selectedFlashcardId"
+    ></button>
+
+  </div>
+</div>

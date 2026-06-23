@@ -1,0 +1,51 @@
+<h2>Mes résultats de quiz</h2>
+=
+<div class="chart-container">
+  <p-chart
+    type="bar"
+    [data]="chartData"
+    [options]="chartOptions">
+  </p-chart>
+</div>
+<div class="action-bar">
+
+  <button
+    pButton
+    type="button"
+    label="Exporter PDF"
+    icon="pi pi-file-pdf"
+    (click)="exportPdf()">
+  </button>
+
+</div>
+
+<p-table
+  [value]="quizzes()"
+  [loading]="loading()"
+  [paginator]="true"
+  [rows]="5"
+  responsiveLayout="scroll"
+  styleClass="p-datatable-striped p-datatable-gridlines"
+>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Deck</th>
+      <th>Date</th>
+      <th>Score</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-quiz>
+    <tr>
+      <td>{{ quiz.id }}</td>
+      <td>Deck #{{ quiz.deckId }}</td>
+      <td>{{ quiz.attemptDate | date:'short' }}</td>
+      <td>
+        {{ quiz.score }} / {{ quiz.totalQuestions }}
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>

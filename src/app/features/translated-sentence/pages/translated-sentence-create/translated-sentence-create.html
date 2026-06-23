@@ -1,0 +1,63 @@
+<div class="page">
+
+  <div class="card">
+
+    <h2>Créer une phrase traduite</h2>
+
+    <!-- phrase originale -->
+    <div class="field">
+      <label>Phrase originale</label>
+      <input
+        pInputText
+        name="sentence"
+        [(ngModel)]="sentence.sentence"
+        placeholder="Entrer la phrase"
+      />
+    </div>
+
+    <!-- traduction -->
+    <div class="field">
+      <label>Traduction</label>
+      <input
+        pInputText
+        name="translatedSentence"
+        [(ngModel)]="sentence.translatedSentence"
+        placeholder="Traduction"
+      />
+    </div>
+
+    <!-- SELECT SIMPLE (remplace dropdown) -->
+    <div class="field">
+      <label>Translation</label>
+
+      <select
+        class="form-control"
+        name="translationId"
+        [(ngModel)]="sentence.translationId">
+
+        <option [ngValue]="null">
+          -- choisir une traduction --
+        </option>
+
+        @for (t of translations(); track t.id) {
+          <option [ngValue]="t.id">
+            {{ t.translatedText }}
+          </option>
+        }
+
+      </select>
+
+    </div>
+
+    <!-- button -->
+    <button
+      pButton
+      label="Créer"
+      icon="pi pi-check"
+      (click)="save()"
+      [disabled]="!sentence.sentence || !sentence.translatedSentence || !sentence.translationId">
+    </button>
+
+  </div>
+
+</div>

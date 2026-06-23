@@ -1,0 +1,15 @@
+<h2>Créer une flashcard</h2>
+
+<form (ngSubmit)="create()">
+
+  <label>Recto</label>
+  <input [(ngModel)]="flashcard.frontText" name="frontText" required />
+
+  <label>Verso</label>
+  <input [(ngModel)]="flashcard.backText" name="backText" required />
+
+  <button type="submit">
+    Créer
+  </button>
+
+</form>

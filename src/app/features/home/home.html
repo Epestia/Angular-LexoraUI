@@ -1,0 +1,32 @@
+<div class="home-container">
+
+  <p-card header="Bienvenue " class="main-card">
+    <p>
+      Cette application t’aide à apprendre des langues grâce à des <b>flashcards</b>.
+      Tu peux créer des decks, t’entraîner et tester tes connaissances.
+    </p>
+
+    <div class="actions">
+      <button pButton label="Voir mes decks" icon="pi pi-book" (click)="goToDecks()"></button>
+      <button pButton label="Commencer une session" icon="pi pi-play" (click)="goToStudy()" class="p-button-success"></button>
+      <button pButton label="Faire un quiz" icon="pi pi-question-circle" (click)="goToQuiz()" class="p-button-warning"></button>
+    </div>
+  </p-card>
+
+  <div class="features">
+
+    <p-card header="Flashcards">
+      <p>Apprends mot par mot.</p>
+    </p-card>
+
+    <p-card header="Sessions d’étude">
+      <p>Révise tes decks de manière guidée et interactive.</p>
+    </p-card>
+
+    <p-card header="🎯 Quiz">
+      <p>Teste tes connaissances et suis ta progression.</p>
+    </p-card>
+
+  </div>
+
+</div>

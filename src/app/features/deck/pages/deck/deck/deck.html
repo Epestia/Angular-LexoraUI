@@ -1,0 +1,77 @@
+<div class="deck-container">
+
+  @for (deck of decks(); track deck.id ?? $index) {
+
+    <p-card class="deck-card" appHoverHighlight>
+
+      <ng-template pTemplate="header">
+        <div class="deck-header">
+          <h2>{{ deck.title | capitalize }}</h2>
+
+          <p-tag
+            [value]="deck.status | capitalize"
+            [severity]="getStatusSeverity(deck.status)">
+          </p-tag>
+        </div>
+      </ng-template>
+
+      <div class="deck-meta">
+        <span>{{ deck.language }}</span>
+        <span>{{ getFlashcards(deck.id).length }} flashcards</span>
+      </div>
+
+      <div class="flashcards">
+
+        @for (flashcard of getFlashcards(deck.id); track flashcard.id ?? $index) {
+
+          <div class="flashcard">
+
+            <div class="front">
+              {{ flashcard.frontText | capitalize }}
+            </div>
+
+            <div class="flip-icon">
+              ↺
+            </div>
+
+            <div class="back">
+              {{ flashcard.backText | capitalize }}
+            </div>
+
+
+          </div>
+
+        }
+
+      </div>
+
+      <div class="actions">
+
+        <p-button
+          icon="pi pi-pencil"
+          severity="info"
+          label="Edit"
+          [routerLink]="['/decks/edit', deck.id]">
+        </p-button>
+
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          label="Supprimer"
+          (click)="deleteDeck(deck.id!)">
+        </p-button>
+
+        <p-button
+          icon="pi pi-plus"
+          severity="success"
+          label="Créer flashcard"
+          [routerLink]="['/decks', deck.id, 'flashcards', 'create']">
+        </p-button>
+
+      </div>
+
+    </p-card>
+
+  }
+
+</div>

@@ -1,0 +1,67 @@
+<h2 class="title">Mes sessions d'étude</h2>
+
+@if (loading()) {
+  <p-progressSpinner></p-progressSpinner>
+}
+
+@if (!loading() && sessions().length === 0) {
+  <p class="empty">Aucune session trouvée.</p>
+}
+
+<div class="grid">
+
+  @for (session of sessions(); track session.id) {
+
+    <p-card class="session-card">
+
+      <ng-template pTemplate="header">
+        <div class="header">
+
+          <span>Flashcard #{{ session.flashcardId }}</span>
+
+          <div class="actions">
+
+            <span
+              class="tag"
+              [ngClass]="session.known ? 'tag-success' : 'tag-warning'">
+              {{ session.known ? 'Connue' : 'À revoir' }}
+            </span>
+
+            <button
+              pButton
+              type="button"
+              icon="pi pi-pencil"
+              label="Modifier"
+              class="p-button-sm p-button-secondary"
+              (click)="session.id && editSession(session.id)">
+            </button>
+
+          </div>
+
+        </div>
+      </ng-template>
+
+      <div class="content">
+
+        <p>
+          <strong>Répétition :</strong>
+          {{ session.repetitionLevel }}
+        </p>
+
+        <p>
+          <strong>Révisions :</strong>
+          {{ session.timesReviewed }}
+        </p>
+
+        <p>
+          <strong>Prochaine révision :</strong><br>
+          {{ session.nextReviewDate }}
+        </p>
+
+      </div>
+
+    </p-card>
+
+  }
+
+</div>

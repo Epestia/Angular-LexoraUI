@@ -1,0 +1,117 @@
+<h2>Quiz</h2>
+
+@if (!quizStarted()) {
+
+  <h3>Choisir un deck</h3>
+
+  <div class="deck-list">
+
+    @for (deck of decks(); track deck.id) {
+
+      <p-card class="deck-card">
+
+        <ng-template pTemplate="title">
+          {{ deck.title | capitalize }}
+        </ng-template>
+
+        <ng-template pTemplate="content">
+          <p>{{ deck.id | deckLabel }}</p>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            label="Lancer le quiz"
+            icon="pi pi-play"
+            (click)="startQuiz(deck.id)">
+          </button>
+        </ng-template>
+
+      </p-card>
+
+    }
+
+  </div>
+
+}
+
+@if (quizStarted() && !quizFinished() && currentFlashcard) {
+
+  <p-card class="quiz-box">
+
+    <ng-template pTemplate="title">
+      {{ currentFlashcard.frontText | capitalize }}
+    </ng-template>
+
+    <ng-template pTemplate="content">
+
+      <input
+        pInputText
+        [ngModel]="answer()"
+        (ngModelChange)="answer.set($event)"
+        placeholder="Votre réponse"
+        class="w-full"
+      />
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+
+      <button
+        pButton
+        label="Valider"
+        icon="pi pi-check"
+        (click)="submitAnswer()">
+      </button>
+
+    </ng-template>
+
+  </p-card>
+
+}
+
+@if (quizFinished()) {
+
+  <p-card class="result">
+
+    <ng-template pTemplate="title">
+      Résultat 🎉
+    </ng-template>
+
+    <ng-template pTemplate="content">
+
+      <p>
+        Score :
+        <strong>{{ score | quizScore:total }}</strong>
+      </p>
+
+      <p>
+        Réussite :
+        <strong>{{ score | percentageScore:total }}</strong>
+      </p>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+
+      <button
+        pButton
+        label="Enregistrer"
+        icon="pi pi-save"
+        severity="success"
+        (click)="saveQuiz()">
+      </button>
+
+      <button
+        pButton
+        label="Recommencer"
+        icon="pi pi-refresh"
+        class="p-button-secondary"
+        (click)="restart()">
+      </button>
+
+    </ng-template>
+
+  </p-card>
+
+}

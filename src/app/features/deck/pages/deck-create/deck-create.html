@@ -1,0 +1,62 @@
+<div class="page">
+  <div class="card">
+    <h2>Créer un deck</h2>
+
+    <form [formGroup]="deckForm" (ngSubmit)="onSubmit()" class="p-fluid">
+
+
+      <div class="field">
+        <label for="title">Titres</label>
+        <input
+          id="title"
+          pInputText
+          formControlName="title"
+          placeholder="Titre du deck"
+        />
+      </div>
+
+
+      <div class="field">
+        <label for="language">Langue</label>
+        <input
+          id="language"
+          pInputText
+          formControlName="language"
+          placeholder="Ex: FR, EN..."
+        />
+      </div>
+
+
+      <div class="field">
+        <label for="status">Statut</label>
+        <p-dropdown
+          id="status"
+          formControlName="status"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Choisir un statut"
+        ></p-dropdown>
+      </div>
+
+
+      <div class="field-checkbox">
+        <p-checkbox
+          formControlName="isPublic"
+          [binary]="true"
+          inputId="isPublic"
+        ></p-checkbox>
+
+        <label for="isPublic">Deck public</label>
+      </div>
+
+      <button
+        pButton
+        type="submit"
+        label="Créer"
+        icon="pi pi-check"
+        [disabled]="deckForm.invalid"
+      ></button>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="page">
+
+  <h2>Phrases traduites</h2>
+
+  <button
+    pButton
+    label="Créer une phrase traduite"
+    icon="pi pi-plus"
+    class="mb-3"
+    (click)="goToCreate()"
+  ></button>
+
+  <p-table
+    [value]="sentences()"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    *ngIf="sentences().length > 0; else empty"
+  >
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Phrase</th>
+        <th>Traduction</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-sentence>
+      <tr>
+        <td>{{ sentence.sentence }}</td>
+        <td>{{ sentence.translatedSentence }}</td>
+
+        <td>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger p-button-sm"
+            (click)="deleteSentence(sentence.id!)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+  <ng-template #empty>
+    <p>Aucune phrase trouvée.</p>
+  </ng-template>
+
+</div>

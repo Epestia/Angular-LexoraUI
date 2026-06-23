@@ -1,0 +1,51 @@
+<div class="container">
+
+  <p-card header="Créer une traduction">
+
+    <div class="field">
+      <label>Texte traduit</label>
+      <input pInputText
+             [(ngModel)]="translation.translatedText">
+    </div>
+
+    <div class="field">
+      <label>Langue de l'apprenant</label>
+      <input pInputText
+             [(ngModel)]="translation.learnerLanguage">
+    </div>
+
+    <div class="field">
+      <label>Flashcard</label>
+
+      @if (flashcards$ | async; as flashcards) {
+
+        <select class="form-control"
+                [(ngModel)]="translation.flashcardId">
+
+          <option [ngValue]="null">
+            -- Sélectionner une flashcard --
+          </option>
+
+          @for (f of flashcards; track f.id) {
+            <option [ngValue]="f.id">
+              {{ f.frontText }}
+            </option>
+          }
+
+        </select>
+
+      } @else {
+        <p>Chargement...</p>
+      }
+
+    </div>
+
+    <p-button
+      label="Enregistrer"
+      icon="pi pi-save"
+      (click)="save()">
+    </p-button>
+
+  </p-card>
+
+</div>

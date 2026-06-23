@@ -1,0 +1,74 @@
+<div class="page">
+  <div class="card">
+    <h2>Modifier le deck</h2>
+
+    <form [formGroup]="deckForm" (ngSubmit)="onSubmit()" class="p-fluid">
+
+      <div class="field">
+        <label for="title">Titre</label>
+        <input id="title" pInputText formControlName="title" />
+      </div>
+
+
+      <div class="field">
+        <label for="language">Langue</label>
+        <input id="language" pInputText formControlName="language" />
+      </div>
+
+
+      <div class="field-checkbox">
+        <p-checkbox
+          formControlName="isPublic"
+          [binary]="true"
+          inputId="isPublic"
+        ></p-checkbox>
+        <label for="isPublic">Public</label>
+      </div>
+
+
+      <div class="field">
+        <label for="status">Statut</label>
+        <p-dropdown
+          id="status"
+          formControlName="status"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Choisir un statut"
+        ></p-dropdown>
+      </div>
+
+
+      @if (authService.isAdmin()) {
+
+        <div class="field">
+          <label for="validatedById">Validé par (ID)</label>
+          <input
+            id="validatedById"
+            pInputText
+            type="number"
+            formControlName="validatedById"
+          />
+        </div>
+
+        <div class="field">
+          <label for="validationDate">Date de validation</label>
+          <input
+            id="validationDate"
+            type="date"
+            pInputText
+            formControlName="validationDate"
+          />
+        </div>
+      }
+
+      <button
+        pButton
+        type="submit"
+        label="Sauvegarder"
+        icon="pi pi-check"
+        [disabled]="deckForm.invalid"
+      ></button>
+
+    </form>
+  </div>
+</div>
